@@ -3,6 +3,19 @@
 
   let apiStatus = { status: 'checking', ping: '...', message: 'Connecting...' };
   let stats = { total_requests: 0, successful_requests: 0 };
+  let showModal = false;
+
+  function openModal() {
+    showModal = true;
+  }
+
+  function closeModal() {
+    showModal = false;
+  }
+
+  function scrollToSection(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  }
 
   onMount(async () => {
     try {
@@ -65,8 +78,8 @@
       </p>
 
       <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a
-          href="#download"
+        <button
+          on:click={() => scrollToSection('download')}
           class="group bg-gradient-to-r from-blue-600 to-blue-800 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex items-center"
         >
           <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,8 +94,8 @@
           <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
-        </a>
-        <a href="#demo" class="text-gray-700 hover:text-blue-600 font-semibold text-lg flex items-center">
+        </button>
+        <button on:click={openModal} class="text-gray-700 hover:text-blue-600 font-semibold text-lg flex items-center">
           <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
@@ -92,7 +105,7 @@
             ></path>
           </svg>
           Watch Demo
-        </a>
+        </button>
       </div>
     </div>
 
@@ -309,8 +322,8 @@
       <div>
         <h3 class="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Product</h3>
         <ul class="space-y-2 text-gray-400 text-sm">
-          <li><a href="#download" class="hover:text-white transition-colors">Download</a></li>
-          <li><a href="#demo" class="hover:text-white transition-colors">Demo</a></li>
+          <li><button on:click={() => scrollToSection('download')} class="hover:text-white transition-colors text-left">Download</button></li>
+          <li><button on:click={openModal} class="hover:text-white transition-colors text-left">Demo</button></li>
           <li><a href="/support" class="hover:text-white transition-colors">Features</a></li>
         </ul>
       </div>
@@ -331,6 +344,33 @@
     </div>
   </div>
 </footer>
+
+<!-- Demo Modal -->
+{#if showModal}
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-fade-in" on:click={closeModal}>
+    <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden animate-scale-in" on:click|stopPropagation>
+      <div class="flex justify-between items-center p-6 border-b">
+        <h3 class="text-2xl font-bold text-gray-900">PicPark Demo</h3>
+        <button on:click={closeModal} class="text-gray-400 hover:text-gray-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="p-6">
+        <div class="aspect-video bg-gray-100 rounded-xl flex items-center justify-center">
+          <div class="text-center text-gray-500">
+            <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+            <p class="text-lg font-medium">Demo video placeholder</p>
+            <p class="text-sm">Add your video embed here</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{/if}
 
 <style>
   .scroll-animate {
@@ -355,6 +395,34 @@
     }
     50% {
       transform: translateY(-20px) rotate(5deg);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
     }
   }
 </style>

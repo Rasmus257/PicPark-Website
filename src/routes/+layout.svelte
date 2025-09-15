@@ -15,7 +15,7 @@
         <div class="flex items-center space-x-2 sm:space-x-6">
           <a href="/support" class="text-gray-700 hover:text-blue-600 font-medium transition-colors text-sm sm:text-base">Support</a>
           <a href="/privacy" class="text-gray-700 hover:text-blue-600 font-medium transition-colors text-sm sm:text-base">Privacy</a>
-          <a href="#download" class="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-3 py-2 sm:px-4 rounded-full font-medium hover:shadow-lg transition-all text-sm sm:text-base"> Get App </a>
+          <button on:click={() => scrollToSection('download')} class="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-3 py-2 sm:px-4 rounded-full font-medium hover:shadow-lg transition-all text-sm sm:text-base"> Get App </button>
         </div>
       </div>
     </div>
