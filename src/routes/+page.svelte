@@ -2,7 +2,6 @@
   import { onMount } from 'svelte';
 
   let apiStatus = { status: 'checking', ping: '...', message: 'Connecting...' };
-  let stats = { total_requests: 0, successful_requests: 0 };
   let showModal = false;
 
   function openModal() {
@@ -13,26 +12,24 @@
     showModal = false;
   }
 
+  /**
+   * @param {string} id
+   */
   function scrollToSection(id) {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   }
 
   onMount(async () => {
     try {
-      const [healthRes, statsRes] = await Promise.all([fetch('/api/status'), fetch('/api/parking')]);
+      const healthRes = await fetch('/api/status');
 
       const healthData = await healthRes.json();
-      const statsData = await statsRes.json();
 
       apiStatus = {
         status: healthData.status,
         ping: healthData.ping,
         message: healthData.message,
       };
-
-      if (statsData.success) {
-        stats = statsData.stats;
-      }
     } catch (error) {
       apiStatus = { status: 'down', ping: 'timeout', message: 'API unavailable' };
     }
@@ -361,7 +358,12 @@
         <div class="aspect-video bg-gray-100 rounded-xl flex items-center justify-center">
           <div class="text-center text-gray-500">
             <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+              ></path>
             </svg>
             <p class="text-lg font-medium">Demo video placeholder</p>
             <p class="text-sm">Add your video embed here</p>

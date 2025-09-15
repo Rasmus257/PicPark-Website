@@ -1,7 +1,6 @@
 import Database from 'better-sqlite3';
-import { dev } from '$app/environment';
 
-const dbPath = dev ? 'picpark-dev.db' : 'picpark.db';
+const dbPath = 'picpark.db';
 export const db = new Database(dbPath);
 
 db.exec(`
