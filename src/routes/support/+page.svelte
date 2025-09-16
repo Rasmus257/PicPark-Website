@@ -26,25 +26,25 @@
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="border-l-4 border-blue-500 pl-4">
-            <h3 class="font-semibold text-lg text-gray-900">Why does PicPark parking sign scanning take time?</h3>
-            <p class="text-gray-600 mt-2">AI parking sign analysis time depends on image quality, parking sign complexity, and server load during peak hours.</p>
-          </div>
+        <div class="border-l-4 border-blue-500 pl-4">
+          <h3 class="font-semibold text-lg text-gray-900">Why does PicPark parking sign scanning take time?</h3>
+          <p class="text-gray-600 mt-2">AI parking sign analysis time depends on image quality, parking sign complexity, and server load during peak hours.</p>
+        </div>
 
-          <div class="border-l-4 border-green-500 pl-4">
-            <h3 class="font-semibold text-lg text-gray-900">Which countries support PicPark parking detection?</h3>
-            <p class="text-gray-600 mt-2">PicPark works worldwide with standard parking signs and regulations across major cities.</p>
-          </div>
+        <div class="border-l-4 border-green-500 pl-4">
+          <h3 class="font-semibold text-lg text-gray-900">Which countries support PicPark parking detection?</h3>
+          <p class="text-gray-600 mt-2">PicPark works worldwide with standard parking signs and regulations across major cities.</p>
+        </div>
 
-          <div class="border-l-4 border-purple-500 pl-4">
-            <h3 class="font-semibold text-lg text-gray-900">Is my parking data safe with PicPark?</h3>
-            <p class="text-gray-600 mt-2">Yes! All parking sign processing happens on your device. We never store or access your photos.</p>
-          </div>
+        <div class="border-l-4 border-purple-500 pl-4">
+          <h3 class="font-semibold text-lg text-gray-900">Is my parking data safe with PicPark?</h3>
+          <p class="text-gray-600 mt-2">Yes! All parking sign processing happens on your device. We never store or access your photos.</p>
+        </div>
 
-          <div class="border-l-4 border-orange-500 pl-4">
-            <h3 class="font-semibold text-lg text-gray-900">What if the app gives a wrong result?</h3>
-            <p class="text-gray-600 mt-2">Always use your judgment for complex situations. When in doubt, check local regulations.</p>
-          </div>
+        <div class="border-l-4 border-orange-500 pl-4">
+          <h3 class="font-semibold text-lg text-gray-900">What if the app gives a wrong result?</h3>
+          <p class="text-gray-600 mt-2">Always use your judgment for complex situations. When in doubt, check local regulations.</p>
+        </div>
       </div>
     </div>
 
@@ -60,16 +60,21 @@
         </svg>
         Need More Help?
       </h2>
-      
+
       <div class="text-center max-w-md mx-auto">
         <p class="text-gray-600 mb-6">Can't find what you're looking for? Send us an email and we'll get back to you.</p>
-        
+
         <a
           href="mailto:support@picpark.app"
           class="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-800 text-white py-3 px-6 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 space-x-2"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            ></path>
           </svg>
           <span>Contact Support</span>
         </a>

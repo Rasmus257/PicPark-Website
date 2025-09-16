@@ -8,7 +8,7 @@
       <div class="flex justify-between items-center h-16">
         <div class="flex items-center">
           <a href="/" class="flex items-center space-x-2">
-            <img src="/favicon.png" alt="PicPark Logo" class="w-8 h-8" />
+            <img src="/favicon.webp" alt="PicPark Logo" class="w-7 h-7" />
             <span class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">PicPark</span>
           </a>
         </div>

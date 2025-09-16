@@ -116,7 +116,7 @@
       </h1>
 
       <p class="mt-6 text-xl leading-8 text-gray-700 max-w-3xl mx-auto">
-        Complex parking signs got you puzzled? Our international AI instantly decodes any parking sign worldwide – from multilingual text to cryptic symbols. Get clear yes/no
+        Complex parking signs got you puzzled? Advanced AI technology instantly decodes any parking sign worldwide – from multilingual text to cryptic symbols. Get clear yes/no
         answers in seconds.
       </p>
 
@@ -182,60 +182,183 @@
   </div>
 </div>
 
-<!-- Features Section -->
+<!-- How It Works Section -->
 <div class="py-20 bg-white/50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-3xl font-bold text-gray-900 mb-4">How It Works</h2>
-      <p class="text-gray-600 text-lg">Three simple steps to parking confidence</p>
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
+      <p class="text-gray-600 text-xl max-w-3xl mx-auto">
+        From confusing parking signs to crystal clear answers in seconds. Advanced AI handles the complexity so you don't have to.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="text-center group">
-        <div
-          class="mx-auto w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
-        >
-          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-            ></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          </svg>
+    <!-- Process Flow -->
+    <div class="relative mb-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+        <!-- Step 1 -->
+        <div class="text-center group relative">
+          <div class="absolute -top-4 -right-4 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">1</div>
+          <div
+            class="mx-auto w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-700 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl"
+          >
+            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+              ></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-4 text-gray-900">Snap & Capture</h3>
+          <p class="text-gray-600 text-lg md:mb-4 h-20 md:h-24">
+            Simply point your camera at any parking sign. Advanced optical character recognition captures all text, symbols, and formatting instantly.
+          </p>
+          <div class="bg-blue-50 rounded-xl p-4 text-sm text-blue-800 h-24 flex flex-col justify-center">
+            <div class="flex items-center justify-center space-x-2 mb-2">
+              <span class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></span>
+              <span class="font-medium">Instant capture</span>
+            </div>
+            <div class="text-blue-600">Fast photo processing with smart cropping</div>
+          </div>
         </div>
-        <h3 class="text-xl font-bold mb-3">Snap & Scan</h3>
-        <p class="text-gray-600">Point your camera at any parking sign. Our AI instantly recognizes and reads the text.</p>
-      </div>
 
-      <div class="text-center group">
-        <div
-          class="mx-auto w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
-        >
-          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            ></path>
-          </svg>
+        <!-- Step 2 -->
+        <div class="text-center group relative">
+          <div class="absolute -top-4 -right-4 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">2</div>
+          <div
+            class="mx-auto w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl"
+          >
+            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-4 text-gray-900">AI Intelligence</h3>
+          <p class="text-gray-600 text-lg md:mb-4 h-20 md:h-24">
+            Sophisticated machine learning algorithms interpret complex parking regulations, time restrictions, permit requirements and local exceptions.
+          </p>
+          <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-4 text-sm h-24 flex items-center">
+            <div class="grid grid-cols-2 gap-3 text-xs justify-items-center w-full">
+              <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 bg-blue-400 rounded-full flex-shrink-0"></span>
+                <span class="text-blue-700">Time parsing</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 bg-purple-400 rounded-full flex-shrink-0"></span>
+                <span class="text-purple-700">Rule analysis</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 bg-green-400 rounded-full flex-shrink-0"></span>
+                <span class="text-green-700">Multi-language</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 bg-orange-400 rounded-full flex-shrink-0"></span>
+                <span class="text-orange-700">Context aware</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <h3 class="text-xl font-bold mb-3">AI Analysis</h3>
-        <p class="text-gray-600">Advanced machine learning interprets complex parking rules, time restrictions, and exceptions.</p>
-      </div>
 
-      <div class="text-center group">
-        <div
-          class="mx-auto w-20 h-20 bg-gradient-to-br from-blue-300 to-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
-        >
-          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
+        <!-- Step 3 -->
+        <div class="text-center group relative">
+          <div class="absolute -top-4 -right-4 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">3</div>
+          <div
+            class="mx-auto w-24 h-24 bg-gradient-to-br from-green-400 to-blue-500 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl"
+          >
+            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-4 text-gray-900">Instant Clarity</h3>
+          <p class="text-gray-600 text-lg md:mb-4 h-20 md:h-24">Get a clear YES or NO answer with detailed explanations, time limits, and helpful tips to avoid tickets.</p>
+          <div class="bg-green-50 rounded-xl p-4 h-24 flex flex-col justify-center">
+            <div class="flex items-center justify-center space-x-2 mb-2">
+              <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+              <span class="font-medium text-green-800">You can park here!</span>
+            </div>
+            <div class="text-green-600 text-sm">2hr limit • Mon-Fri 9AM-6PM</div>
+            <div class="text-green-500 text-xs mt-1">⏰ Set reminder for 1h 45min</div>
+          </div>
         </div>
-        <h3 class="text-xl font-bold mb-3">Clear Answer</h3>
-        <p class="text-gray-600">Get a simple yes/no answer with detailed explanations and time limits.</p>
+      </div>
+    </div>
+
+    <!-- Advanced Features -->
+    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8">
+      <div class="flex items-center justify-center mb-8">
+        <svg class="w-6 h-6 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+          ></path>
+        </svg>
+        <h3 class="text-2xl font-bold text-gray-900">Advanced Capabilities</h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+          </div>
+          <h4 class="font-semibold text-gray-900 mb-2">Global Coverage</h4>
+          <p class="text-gray-600 text-sm">Works in 50+ countries with local parking rules</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              ></path>
+            </svg>
+          </div>
+          <h4 class="font-semibold text-gray-900 mb-2">Smart Reminders</h4>
+          <p class="text-gray-600 text-sm">Auto-set timers before your parking expires</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              ></path>
+            </svg>
+          </div>
+          <h4 class="font-semibold text-gray-900 mb-2">Secure & Private</h4>
+          <p class="text-gray-600 text-sm">Your photos are processed securely and never stored</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+          </div>
+          <h4 class="font-semibold text-gray-900 mb-2">Ticket Prevention</h4>
+          <p class="text-gray-600 text-sm">Avoid costly mistakes with clear parking guidance</p>
+        </div>
       </div>
     </div>
   </div>
@@ -251,51 +374,24 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <div class="bg-white rounded-2xl p-6 shadow-lg">
-        <div class="aspect-square bg-gray-200 rounded-xl mb-4 flex items-center justify-center">
-          <div class="text-center">
-            <svg class="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              ></path>
-            </svg>
-            <span class="text-gray-500 text-sm">Parking Sign Photo</span>
-          </div>
+        <div class="aspect-square bg-gray-200 rounded-xl mb-4 overflow-hidden">
+          <img src="/ParkSignPhoto.jpg" alt="Parking sign photo" class="w-full h-full object-cover" />
         </div>
         <h3 class="font-semibold mb-2">Step 1: Take Photo</h3>
         <p class="text-gray-600 text-sm">Point your camera at any parking sign</p>
       </div>
 
       <div class="bg-white rounded-2xl p-6 shadow-lg">
-        <div class="aspect-square bg-gray-200 rounded-xl mb-4 flex items-center justify-center">
-          <div class="text-center">
-            <svg class="w-12 h-12 text-blue-500 mx-auto mb-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-              ></path>
-            </svg>
-            <span class="text-gray-500 text-sm">AI Processing...</span>
-          </div>
+        <div class="aspect-square bg-gray-200 rounded-xl mb-4 overflow-hidden">
+          <img src="/ParkSignPhoto_Scan.png" alt="AI scanning parking sign" class="w-full h-full object-cover" />
         </div>
         <h3 class="font-semibold mb-2">Step 2: AI Analysis</h3>
-        <p class="text-gray-600 text-sm">Our AI reads and interprets the sign</p>
+        <p class="text-gray-600 text-sm">Advanced AI reads and interprets the sign</p>
       </div>
 
       <div class="bg-white rounded-2xl p-6 shadow-lg">
-        <div class="aspect-square bg-blue-50 rounded-xl mb-4 flex items-center justify-center border-2 border-blue-200">
-          <div class="text-center">
-            <svg class="w-12 h-12 text-green-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            <div class="text-sm font-medium text-blue-800">You can park here</div>
-            <div class="text-xs text-blue-600 mt-1">2 hour limit, Mon-Fri</div>
-          </div>
+        <div class="aspect-square bg-gray-200 rounded-xl mb-4 overflow-hidden">
+          <img src="/ParkSignPhoto_Result.png" alt="Parking analysis result" class="w-full h-full object-cover" />
         </div>
         <h3 class="font-semibold mb-2">Step 3: Clear Result</h3>
         <p class="text-gray-600 text-sm">Get instant yes/no with details</p>
@@ -345,7 +441,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
       <div class="col-span-2 md:col-span-2">
         <div class="flex items-center space-x-2 mb-4">
-          <img src="/favicon.png" alt="PicPark Logo" class="w-8 h-8" />
+          <img src="/favicon.webp" alt="PicPark Logo" class="w-6 h-6" />
           <span class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent">PicPark</span>
         </div>
         <p class="text-gray-400 mb-4 max-w-md text-sm sm:text-base">Never get a parking ticket again. Smart AI-powered parking sign detection that works offline on your device.</p>
