@@ -53,8 +53,54 @@
 </script>
 
 <svelte:head>
-  <title>PicPark - Smart Parking Sign Detection</title>
-  <meta name="description" content="Never get a parking ticket again with AI-powered sign detection" />
+  <title>PicPark - Smart Parking Sign Detection | AI-Powered Parking Assistant</title>
+  <meta
+    name="description"
+    content="Never get a parking ticket again! PicPark uses AI to instantly decode complex parking signs worldwide. Get clear yes/no answers in seconds. Free download."
+  />
+  <meta name="keywords" content="parking app, parking signs, AI parking, parking assistant, parking tickets, smart parking, parking detection" />
+  <meta name="author" content="PicPark" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="PicPark - Smart Parking Sign Detection" />
+  <meta
+    property="og:description"
+    content="PicPark is the simple way to read parking signs. Whether it's a clean, complex, or confusing sign, PicPark gives you an instant yes or no, so you can park without overthinking."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://picpark.app" />
+  <meta property="og:image" content="https://picpark.app/og-image.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PicPark - Smart Parking Sign Detection" />
+  <meta
+    name="twitter:description"
+    content="PicPark is the simple way to read parking signs. Whether it's a clean, complex, or confusing sign, PicPark gives you an instant yes or no, so you can park without overthinking."
+  />
+  <meta name="twitter:image" content="https://picpark.app/og-image.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://picpark.app" />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "PicPark",
+      "description": "AI-powered parking sign detection app that helps you avoid parking tickets",
+      "url": "https://picpark.app",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": ["iOS", "Android"],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  </script>
 </svelte:head>
 
 <!-- Hero Section -->

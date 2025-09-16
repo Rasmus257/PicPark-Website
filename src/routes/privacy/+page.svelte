@@ -1,12 +1,15 @@
 <svelte:head>
-  <title>Privacy Policy - PicPark</title>
+  <title>Privacy Policy - PicPark | Data Protection & Security</title>
+  <meta name="description" content="PicPark privacy policy. Learn how we protect your data with on-device AI processing. No photo storage, complete privacy guaranteed." />
+  <meta name="keywords" content="PicPark privacy, data protection, on-device processing, privacy policy, data security" />
+  <link rel="canonical" href="https://picpark.app/privacy" />
 </svelte:head>
 
 <div class="bg-gradient-to-br from-blue-50 to-purple-50 py-16">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">Privacy Policy</h1>
-      <p class="text-xl text-gray-600">Your privacy is our priority</p>
+      <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-4">PicPark Privacy Policy & Data Protection</h1>
+      <p class="text-xl text-gray-600">Complete privacy with on-device AI processing. Your parking data stays secure on your device.</p>
     </div>
 
     <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
@@ -20,7 +23,7 @@
           ></path>
         </svg>
         <div>
-          <h2 class="text-xl font-semibold">Privacy-First Design</h2>
+          <h2 class="text-xl font-semibold">PicPark Privacy-First AI Design</h2>
           <p class="text-gray-600">Last updated: {new Date().toLocaleDateString()}</p>
         </div>
       </div>
@@ -33,10 +36,10 @@
           <h3 class="text-lg font-semibold text-green-800">What We DON'T Do</h3>
         </div>
         <ul class="space-y-2 text-green-700">
-          <li>• We don't store your photos on our servers</li>
-          <li>• We don't track your location</li>
-          <li>• We don't sell your data to third parties</li>
-          <li>• We don't require account creation</li>
+          <li>• We don't store your parking sign photos on our servers</li>
+          <li>• We don't track your location or parking history</li>
+          <li>• We don't sell your parking data to third parties</li>
+          <li>• We don't require account creation for parking detection</li>
         </ul>
       </div>
     </div>
@@ -47,7 +50,7 @@
           <svg class="w-8 h-8 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
           </svg>
-          On-Device Processing
+          On-Device AI Parking Sign Processing
         </h2>
         <p class="text-gray-700 leading-relaxed">
           PicPark processes all parking sign images locally on your device using advanced on-device AI. Your photos never leave your phone, ensuring complete privacy and faster
@@ -128,7 +131,7 @@
         <p class="mb-4">If you have any questions about this Privacy Policy or our privacy practices, we're here to help.</p>
         <div class="flex flex-col sm:flex-row gap-4">
           <a
-            href="mailto:privacy@picpark.app"
+            href="mailto:support@picpark.app"
             class="bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center"
           >
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -139,7 +142,7 @@
                 d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
               ></path>
             </svg>
-            privacy@picpark.app
+            support@picpark.app
           </a>
           <a
             href="/support"
