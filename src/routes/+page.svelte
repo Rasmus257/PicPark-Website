@@ -84,17 +84,6 @@
   <!-- Canonical -->
   <link rel="canonical" href="https://picpark.app" />
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4G2J85JT43"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-4G2J85JT43');
-  </script>
-
   <!-- JSON-LD -->
   <script type="application/ld+json">
     {
