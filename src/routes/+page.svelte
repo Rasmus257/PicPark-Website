@@ -212,7 +212,7 @@
             </svg>
           </div>
           <h3 class="text-2xl font-bold mb-4 text-gray-900">Snap & Capture</h3>
-          <p class="text-gray-600 text-lg md:mb-4 h-20 md:h-24">
+          <p class="text-gray-600 text-lg md:mb-4 h-32 md:h-28">
             Simply point your camera at any parking sign. Advanced optical character recognition captures all text, symbols, and formatting instantly.
           </p>
           <div class="bg-blue-50 rounded-xl p-4 text-sm text-blue-800 h-24 flex flex-col justify-center">
@@ -240,7 +240,7 @@
             </svg>
           </div>
           <h3 class="text-2xl font-bold mb-4 text-gray-900">AI Intelligence</h3>
-          <p class="text-gray-600 text-lg md:mb-4 h-20 md:h-24">
+          <p class="text-gray-600 text-lg md:mb-4 h-32 md:h-28">
             Sophisticated machine learning algorithms interpret complex parking regulations, time restrictions, permit requirements and local exceptions.
           </p>
           <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-4 text-sm h-24 flex items-center">
@@ -276,7 +276,7 @@
             </svg>
           </div>
           <h3 class="text-2xl font-bold mb-4 text-gray-900">Instant Clarity</h3>
-          <p class="text-gray-600 text-lg md:mb-4 h-20 md:h-24">Get a clear YES or NO answer with detailed explanations, time limits, and helpful tips to avoid tickets.</p>
+          <p class="text-gray-600 text-lg md:mb-4 h-32 md:h-28">Get a clear YES or NO answer with detailed explanations, time limits, and helpful tips to avoid tickets.</p>
           <div class="bg-green-50 rounded-xl p-4 h-24 flex flex-col justify-center">
             <div class="flex items-center justify-center space-x-2 mb-2">
               <div class="w-3 h-3 bg-green-500 rounded-full"></div>
