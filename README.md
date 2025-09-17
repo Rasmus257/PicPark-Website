@@ -1,45 +1,36 @@
-# PicPark Website
+# PicPark
 
-Full-stack SvelteKit app for PicPark - Smart Parking Sign Detection.
+**Smart Parking Sign Detection with AI**
+
+PicPark is an AI-powered mobile app that instantly decodes complex parking signs worldwide. Simply point your camera at any parking sign and get a clear yes/no answer with detailed explanations.
+
+## What It Does
+
+🚗 **Instant Analysis** - Snap a photo of any parking sign and get results in seconds
+
+🌍 **Global Coverage** - Works with parking signs in 50+ countries
+
+🧠 **AI Intelligence** - Advanced machine learning interprets complex parking rules, time restrictions, and local exceptions
+
+📱 **Mobile-First** - Designed for quick, on-the-go parking decisions
+
+🔒 **Privacy-Focused** - Your photos are processed securely and never stored
+
+⏰ **Smart Reminders** - Auto-set timers before your parking expires
+
+## How It Works
+
+1. **Snap & Capture** - Point your camera at any parking sign
+2. **AI Intelligence** - Sophisticated algorithms interpret parking regulations
+3. **Instant Clarity** - Get clear YES/NO answers with detailed explanations
 
 ## Features
 
-- 🏠 Static pages (landing, privacy, support)
-- 🔌 API endpoints for parking sign analysis
-- 📱 Mobile-friendly responsive design
-- 🗄️ SQLite database for logging
-- 🚀 Ready for Raspberry Pi deployment
+- Real-time parking sign analysis
+- Multi-language support
+- Offline-capable image processing
+- Time parsing and rule analysis
+- Context-aware interpretations
+- Ticket prevention guidance
 
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-## API Endpoints
-
-- `GET /api/hello` - Health check
-- `POST /api/parking` - Analyze parking sign
-- `GET /api/parking` - Get usage stats
-
-## Deployment on Raspberry Pi
-
-1. Build the app: `npm run build`
-2. Copy `build/` folder to Pi
-3. Install dependencies: `npm ci --production`
-4. Start with PM2: `pm2 start build/index.js --name picpark`
-5. Configure Nginx reverse proxy to port 3000
-
-## Database
-
-Uses SQLite for lightweight logging. Database file created automatically on first run.
+Never get a parking ticket again with PicPark's intelligent parking assistant.
