@@ -73,7 +73,7 @@
   <meta property="og:image" content="https://picpark.app/ParkSignPhoto_Result.png" />
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="PicPark - Smart Parking Sign Detection" />
   <meta
     name="twitter:description"
