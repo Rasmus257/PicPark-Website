@@ -70,7 +70,7 @@
   />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://picpark.app" />
-  <meta property="og:image" content="https://picpark.app/ParkSignPhoto_Result.png" />
+  <meta property="og:image" content="https://picpark.app/favicon.webp" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary" />
@@ -79,7 +79,7 @@
     name="twitter:description"
     content="PicPark is the simple way to read parking signs. Whether it's a clean, complex, or confusing sign, PicPark gives you an instant yes or no, so you can park without overthinking."
   />
-  <meta name="twitter:image" content="https://picpark.app/ParkSignPhoto_Result.png" />
+  <meta name="twitter:image" content="https://picpark.app/favicon.webp" />
 
   <!-- Canonical -->
   <link rel="canonical" href="https://picpark.app" />
