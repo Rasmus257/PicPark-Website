@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
 
-  let apiStatus = { status: 'checking', ping: '...', message: 'Connecting...' };
+  let apiStatus = { status: 'checking', ping: '...' };
   let showModal = false;
 
   function openModal() {
@@ -21,17 +21,22 @@
 
   onMount(async () => {
     try {
-      const healthRes = await fetch('/api/status');
+      const start = performance.now();
 
+      const healthRes = await fetch('https://api.picpark.app/status');
       const healthData = await healthRes.json();
+
+      const pingMs = Math.round(performance.now() - start);
 
       apiStatus = {
         status: healthData.status,
-        ping: healthData.ping,
-        message: healthData.message,
+        ping: `${pingMs}ms`,
       };
     } catch (error) {
-      apiStatus = { status: 'down', ping: 'timeout', message: 'API unavailable' };
+      apiStatus = {
+        status: 'offline',
+        ping: 'timeout',
+      };
     }
 
     // Scroll animations
@@ -93,12 +98,7 @@
       "description": "AI-powered parking sign detection app that helps you avoid parking tickets",
       "url": "https://picpark.app",
       "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": ["iOS", "Android"],
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
+      "operatingSystem": ["iOS", "Android"]
     }
   </script>
 </svelte:head>
@@ -447,9 +447,9 @@
         <p class="text-gray-400 mb-4 max-w-md text-sm sm:text-base">Never get a parking ticket again. Smart AI-powered parking sign detection that works offline on your device.</p>
         <div class="flex flex-col sm:flex-row sm:items-center text-sm space-y-1 sm:space-y-0 sm:space-x-2">
           <div class="flex items-center space-x-2">
-            <div class="w-3 h-3 rounded-full {apiStatus.status === 'up' ? 'bg-green-400 animate-pulse' : 'bg-red-400'}"></div>
+            <div class="w-3 h-3 rounded-full {apiStatus.status === 'online' ? 'bg-green-400 animate-pulse' : 'bg-red-400'}"></div>
             <span class="text-gray-400">API:</span>
-            <span class="text-white">{apiStatus.message}</span>
+            <span class="text-white">{apiStatus.status}</span>
           </div>
           {#if apiStatus.ping !== 'timeout'}
             <div class="hidden sm:block text-gray-600">•</div>

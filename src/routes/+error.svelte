@@ -1,7 +1,3 @@
-<script>
-  import { page } from '$app/stores';
-</script>
-
 <svelte:head>
   <title>Page Not Found - PicPark</title>
   <meta name="description" content="The page you're looking for doesn't exist. Return to PicPark homepage for AI-powered parking sign detection." />

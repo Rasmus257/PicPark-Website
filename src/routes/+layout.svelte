@@ -1,5 +1,12 @@
 <script>
   import '../app.css';
+
+  /**
+   * @param {string} id
+   */
+  function scrollToSection(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  }
 </script>
 
 <main class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
