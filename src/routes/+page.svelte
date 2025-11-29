@@ -444,7 +444,7 @@
           <img src="/favicon.webp" alt="PicPark Logo" class="w-6 h-6" />
           <span class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent">PicPark</span>
         </div>
-        <p class="text-gray-400 mb-4 max-w-md text-sm sm:text-base">Never get a parking ticket again. Smart AI-powered parking sign detection that works worldwide</p>
+        <p class="text-gray-400 mb-4 max-w-md text-sm sm:text-base">Never get a parking ticket again. Smart AI-powered parking sign detection that works worldwide.</p>
         <div class="flex flex-col sm:flex-row sm:items-center text-sm space-y-1 sm:space-y-0 sm:space-x-2">
           <div class="flex items-center space-x-2">
             <div class="w-3 h-3 rounded-full {apiStatus.status === 'online' ? 'bg-green-400 animate-pulse' : 'bg-red-400'}"></div>
