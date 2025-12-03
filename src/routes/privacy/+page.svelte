@@ -9,7 +9,7 @@
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <h1 class="text-4xl leading-[45px] font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-4">PicPark Privacy Policy & Data Protection</h1>
-      <p class="text-xl text-gray-600">Last updated: 17/10/2025</p>
+      <p class="text-xl text-gray-600">Last updated: 03/12/2025</p>
     </div>
 
     <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
@@ -144,6 +144,57 @@
           <li>• These services only collect information necessary for their core functionality</li>
           <li>• All transactions are handled anonymously and are not linked to personal identifiers</li>
         </ul>
+      </div>
+
+      <div class="bg-white rounded-2xl p-8 shadow-lg">
+        <h2 class="text-2xl font-semibold mb-4 flex items-center">
+          <svg class="w-8 h-8 mr-3 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+            ></path>
+          </svg>
+          AdMob / Google Ads
+        </h2>
+        <p class="text-gray-700 leading-relaxed mb-4">PicPark displays advertisements via Google AdMob to support the free app experience.</p>
+
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-4">
+          <div class="flex items-center space-x-2 mb-2">
+            <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              ></path>
+            </svg>
+            <h3 class="font-semibold text-yellow-800">EU/EEA/UK Users</h3>
+          </div>
+          <p class="text-yellow-700">Users in the EU/EEA/UK may be asked for consent to serve personalized or non-personalized ads through our consent management platform.</p>
+        </div>
+
+        <h3 class="font-semibold text-gray-900 mb-3">Data Collected by Ad Services</h3>
+        <ul class="space-y-2 text-gray-700 ml-4 mb-4">
+          <li>• Device identifiers (IDFA/AAID) for ad targeting and measurement</li>
+          <li>• Usage data to serve relevant advertisements</li>
+          <li>• Ad performance metrics and analytics</li>
+        </ul>
+
+        <h3 class="font-semibold text-gray-900 mb-3">Your Ad Preferences</h3>
+        <p class="text-gray-700 mb-3">You can manage your advertising preferences through:</p>
+        <ul class="space-y-2 text-gray-700 ml-4 mb-4">
+          <li>• The consent form presented when you first use the app</li>
+          <li>• App settings menu for ongoing preference management</li>
+        </ul>
+
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+          <p class="text-blue-800 mb-2">For more information about Google's advertising practices:</p>
+          <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium">
+            Google's Privacy Policy for Ad Services
+          </a>
+        </div>
       </div>
 
       <div class="bg-white rounded-2xl p-8 shadow-lg">
