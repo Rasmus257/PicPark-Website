@@ -1,3 +1,7 @@
+<script>
+  import Footer from '$lib/components/Footer.svelte';
+</script>
+
 <svelte:head>
   <title>Support & Help Center - PicPark | AI Parking Assistant</title>
   <meta name="description" content="Get help with PicPark parking app. FAQ, troubleshooting, and 24/7 support for AI-powered parking sign detection." />
@@ -141,3 +145,5 @@
     </div>
   </div>
 </div>
+
+<Footer />

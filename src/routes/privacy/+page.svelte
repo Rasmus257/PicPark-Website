@@ -1,3 +1,7 @@
+<script>
+  import Footer from '$lib/components/Footer.svelte';
+</script>
+
 <svelte:head>
   <title>Privacy Policy - PicPark | Data Protection & Security</title>
   <meta name="description" content="PicPark privacy policy. Learn how we protect your data with on-device AI processing. No photo storage, complete privacy guaranteed." />
@@ -299,3 +303,5 @@
     </div>
   </div>
 </div>
+
+<Footer />

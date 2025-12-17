@@ -1,16 +1,8 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, getContext } from 'svelte';
+  import Footer from '../lib/components/Footer.svelte';
 
-  let apiStatus = { status: 'checking', ping: '...' };
-  let showModal = false;
-
-  function openModal() {
-    showModal = true;
-  }
-
-  function closeModal() {
-    showModal = false;
-  }
+  const openModal = getContext('openModal');
 
   /**
    * @param {string} id
@@ -20,25 +12,6 @@
   }
 
   onMount(async () => {
-    try {
-      const start = performance.now();
-
-      const healthRes = await fetch('https://api.picpark.app/status');
-      const healthData = await healthRes.json();
-
-      const pingMs = Math.round(performance.now() - start);
-
-      apiStatus = {
-        status: healthData.status,
-        ping: `${pingMs}ms`,
-      };
-    } catch (error) {
-      apiStatus = {
-        status: 'offline',
-        ping: 'timeout',
-      };
-    }
-
     // Scroll animations
     const observer = new IntersectionObserver(
       (entries) => {
@@ -407,7 +380,12 @@
     <p class="text-xl text-gray-600 mb-12">Download the app and never worry about parking tickets again.</p>
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-      <a href="https://apps.apple.com/us/app/picpark/id6748095680" target="_blank" rel="noopener noreferrer" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold flex items-center space-x-3 hover:bg-blue-700 transition-colors">
+      <a
+        href="https://apps.apple.com/us/app/picpark/id6748095680"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold flex items-center space-x-3 hover:bg-blue-700 transition-colors"
+      >
         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
           <path
             d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
@@ -431,103 +409,13 @@
       </a>
     </div>
 
-    <p class="text-gray-500 text-sm">Free download • No subscription required</p>
+    <p class="text-gray-500 text-sm">Free download • No account or subscription required</p>
   </div>
 </div>
 
-<!-- Footer -->
-<footer class="bg-gray-900 text-white">
-  <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-12">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-      <div class="col-span-2 md:col-span-2">
-        <div class="flex items-center space-x-2 mb-4">
-          <img src="/favicon.webp" alt="PicPark Logo" class="w-6 h-6" />
-          <span class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent">PicPark</span>
-        </div>
-        <p class="text-gray-400 mb-4 max-w-md text-sm sm:text-base">Never get a parking ticket again. Smart AI-powered parking sign detection that works worldwide.</p>
-        <div class="flex flex-col sm:flex-row sm:items-center text-sm space-y-1 sm:space-y-0 sm:space-x-2">
-          <div class="flex items-center space-x-2">
-            <div class="w-3 h-3 rounded-full {apiStatus.status === 'online' ? 'bg-green-400 animate-pulse' : 'bg-red-400'}"></div>
-            <span class="text-gray-400">API:</span>
-            <span class="text-white">{apiStatus.status}</span>
-          </div>
-          {#if apiStatus.ping !== 'timeout'}
-            <div class="hidden sm:block text-gray-600">•</div>
-            <span class="text-gray-400">{apiStatus.ping}</span>
-          {/if}
-        </div>
-      </div>
-
-      <div>
-        <h3 class="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Product</h3>
-        <ul class="space-y-2 text-gray-400 text-sm">
-          <li><button on:click={() => scrollToSection('download')} class="hover:text-white transition-colors text-left">Download</button></li>
-          <li><button on:click={openModal} class="hover:text-white transition-colors text-left">Demo</button></li>
-          <li><a href="/support" class="hover:text-white transition-colors">Features</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Support</h3>
-        <ul class="space-y-2 text-gray-400 text-sm">
-          <li><a href="/support" class="hover:text-white transition-colors">Help Center</a></li>
-          <li><a href="mailto:support@picpark.app" class="hover:text-white transition-colors">Contact Us</a></li>
-          <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
-          <li><a href="/support" class="hover:text-white transition-colors">Terms of Service</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8">
-      <p class="text-gray-400 text-xs sm:text-sm text-center">© {new Date().getFullYear()} PicPark. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
-
-<!-- Demo Modal -->
-{#if showModal}
-  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-fade-in" on:click={closeModal}>
-    <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden animate-scale-in" on:click|stopPropagation>
-      <div class="flex justify-between items-center p-6 border-b">
-        <h3 class="text-2xl font-bold text-gray-900">PicPark Demo</h3>
-        <button on:click={closeModal} class="text-gray-400 hover:text-gray-600">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="p-6">
-        <div class="aspect-video bg-gray-100 rounded-xl flex items-center justify-center">
-          <div class="text-center text-gray-500">
-            <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-              ></path>
-            </svg>
-            <p class="text-lg font-medium">Demo video placeholder</p>
-            <p class="text-sm">Add your video embed here</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-{/if}
+<Footer />
 
 <style>
-  .scroll-animate {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease-out;
-  }
-
-  .animate-in {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
   .float-sign {
     animation: float 6s ease-in-out infinite;
   }
@@ -539,34 +427,6 @@
     }
     50% {
       transform: translateY(-20px) rotate(5deg);
-    }
-  }
-
-  .animate-fade-in {
-    animation: fadeIn 0.3s ease-out;
-  }
-
-  .animate-scale-in {
-    animation: scaleIn 0.3s ease-out;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
     }
   }
 </style>
