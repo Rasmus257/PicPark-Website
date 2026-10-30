@@ -734,7 +734,7 @@
     left: 16.66%;
     right: 16.66%;
     height: 6px;
-    overflow: hidden;
+    overflow: clip;
   }
   .road-line {
     height: 100%;

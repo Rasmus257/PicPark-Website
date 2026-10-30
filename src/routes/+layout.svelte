@@ -24,7 +24,9 @@
   <a class="btn download" href={APP_STORE_URL}>Download</a>
 </nav>
 
-<slot />
+<main>
+  <slot />
+</main>
 
 <footer>
   <div class="road" aria-hidden="true"></div>

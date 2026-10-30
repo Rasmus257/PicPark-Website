@@ -7,7 +7,7 @@
   <meta name="robots" content="noindex" />
 </svelte:head>
 
-<main class="container">
+<div class="container error">
   <div class="sign" aria-hidden="true"><span></span></div>
   <h1 class="display">{$page.status === 404 ? 'Wrong turn' : 'Something went wrong'}</h1>
   <p class="lead">
@@ -17,10 +17,10 @@
     <a class="btn home" href="/">Back to home</a>
     <a href="/support">Need help?</a>
   </div>
-</main>
+</div>
 
 <style>
-  main {
+  .error {
     padding-top: 80px;
     padding-bottom: 80px;
     display: flex;
