@@ -1,432 +1,1001 @@
 <script>
-  import { onMount, getContext } from 'svelte';
-  import Footer from '../lib/components/Footer.svelte';
+  import AppStoreButton from '$lib/components/AppStoreButton.svelte';
+  import Faq from '$lib/components/Faq.svelte';
+  import { SITE_URL, APP_STORE_URL, OG_IMAGE } from '$lib/site.js';
 
-  const openModal = getContext('openModal');
+  const title = 'PicPark: Can I park here? Parking sign reader app';
+  const description =
+    'Snap any parking sign and PicPark tells you if you can park, until when, and when to move. Reads parking signs in many countries. Free on the App Store.';
 
-  /**
-   * @param {string} id
-   */
-  function scrollToSection(id) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  }
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'MobileApplication',
+    name: 'PicPark',
+    description,
+    url: SITE_URL,
+    image: OG_IMAGE,
+    installUrl: APP_STORE_URL,
+    operatingSystem: 'iOS',
+    applicationCategory: 'TravelApplication',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  };
 
-  onMount(async () => {
-    // Scroll animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
+  const countries = [
+    {
+      id: 'us',
+      label: 'United States',
+      when: 'Tuesday, 08:15',
+      ok: false,
+      verdict: 'No parking',
+      detail: 'Street cleaning until 9:00 am',
+      plain:
+        "You can normally park for 2 hours, 8am to 6pm, Monday to Saturday. On Tuesday mornings from 7 to 9 the street is cleaned, so right now you can't park here.",
+    },
+    {
+      id: 'de',
+      label: 'Germany',
+      when: 'Wednesday, 10:05',
+      ok: true,
+      verdict: 'You can park',
+      detail: 'Set your disc to 10:30. Move by 12:30.',
+      plain: 'On weekdays from 8:00 to 18:00 you need a parking disc and can stay up to 2 hours. Set the disc to the next half hour after you arrive.',
+    },
+    {
+      id: 'fr',
+      label: 'France',
+      when: 'Sunday, 14:00',
+      ok: true,
+      verdict: 'You can park',
+      detail: 'Free today. Paid from Monday 9:00.',
+      plain: 'Parking is paid from 9:00 to 19:00, except on Sundays and public holidays. Today it costs nothing.',
+    },
+    {
+      id: 'uk',
+      label: 'United Kingdom',
+      when: 'Saturday, 17:40',
+      ok: true,
+      verdict: 'You can park',
+      detail: "Pay until 18:30, then it's free.",
+      plain: "Monday to Saturday, 8.30am to 6.30pm, you pay at the machine and can stay 2 hours. If you leave, you can't come back within an hour.",
+    },
+    {
+      id: 'se',
+      label: 'Sweden',
+      when: 'Thursday in January, 09:30',
+      ok: false,
+      verdict: 'No parking',
+      detail: 'Street cleaning until 16:00',
+      plain: 'Paid parking on weekdays from 7 to 19. But from 1 November to 15 May, Thursdays 8 to 16 are kept clear for street cleaning.',
+    },
+  ];
+  let current = countries[0];
 
-    document.querySelectorAll('.scroll-animate').forEach((el) => {
-      observer.observe(el);
-    });
-  });
+  const faq = [
+    {
+      q: 'Does PicPark work in my country?',
+      a: 'PicPark reads parking signs from many countries and languages. It is made for travelers, rental cars and unfamiliar cities as much as your own street.',
+    },
+    { q: 'Is it free, and do I need an account?', a: 'PicPark is free to download from the App Store. No account needed, just open it and start scanning.' },
+    {
+      q: 'Can it read several signs on one pole?',
+      a: 'Yes. It combines every plate, including discs, fees, permits, resident zones and seasonal rules, into one answer for the current time.',
+    },
+    {
+      q: 'What if PicPark gets it wrong?',
+      a: 'Every answer shows a confidence score. When it is low, check the sign yourself and tap Report Issue. PicPark is a guide, and you are responsible for following local rules.',
+    },
+    {
+      q: 'What happens to my photos?',
+      a: 'Photos are sent securely for analysis and are never linked to your identity, sold or used for advertising. The <a href="/privacy">privacy policy</a> has the details.',
+    },
+  ];
 </script>
 
 <svelte:head>
-  <title>PicPark - Smart Parking Sign Detection | AI-Powered Parking Assistant</title>
-  <meta
-    name="description"
-    content="Never get a parking ticket again! PicPark uses AI to instantly decode complex parking signs worldwide. Get clear yes/no answers in seconds. Free download."
-  />
-  <meta name="keywords" content="parking app, parking signs, AI parking, parking assistant, parking tickets, smart parking, parking detection" />
-  <meta name="author" content="PicPark" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="PicPark - Smart Parking Sign Detection" />
-  <meta
-    property="og:description"
-    content="PicPark is the simple way to read parking signs. Whether it's a clean, complex, or confusing sign, PicPark gives you an instant yes or no, so you can park without overthinking."
-  />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href="{SITE_URL}/" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://picpark.app" />
-  <meta property="og:image" content="https://picpark.app/favicon.webp" />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="PicPark - Smart Parking Sign Detection" />
-  <meta
-    name="twitter:description"
-    content="PicPark is the simple way to read parking signs. Whether it's a clean, complex, or confusing sign, PicPark gives you an instant yes or no, so you can park without overthinking."
-  />
-  <meta name="twitter:image" content="https://picpark.app/favicon.webp" />
-
-  <!-- Canonical -->
-  <link rel="canonical" href="https://picpark.app" />
-
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "PicPark",
-      "description": "AI-powered parking sign detection app that helps you avoid parking tickets",
-      "url": "https://picpark.app",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": ["iOS", "Android"]
-    }
-  </script>
+  <meta property="og:url" content="{SITE_URL}/" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={OG_IMAGE} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preload" as="image" href="/screens/result.webp" />
+  {@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`}
 </svelte:head>
 
-<!-- Hero Section -->
-<div class="relative overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-    <div class="text-center relative z-10">
-      <div class="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-800 text-sm font-medium mb-8">🌍 Works Worldwide with AI</div>
+<header class="hero container">
+  <h1 class="in">Can I park here?</h1>
+  <p class="in lead" style="animation-delay: 0.1s">Snap any parking sign, anywhere in the world. Get a clear yes or no, and when to move.</p>
+  <div class="in" style="animation-delay: 0.2s"><AppStoreButton /></div>
 
-      <h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-6">
-        Turn Confusing
-        <br class="hidden sm:block" />
-        <span class="text-blue-500">Parking Signs</span> Crystal Clear
-      </h1>
-
-      <p class="mt-6 text-xl leading-8 text-gray-700 max-w-3xl mx-auto">
-        Complex parking signs got you puzzled? Advanced AI technology instantly decodes any parking sign worldwide – from multilingual text to cryptic symbols. Get clear yes/no
-        answers in seconds.
-      </p>
-
-      <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <button
-          on:click={() => scrollToSection('download')}
-          class="group bg-gradient-to-r from-blue-600 to-blue-800 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex items-center"
-        >
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            ></path>
-          </svg>
-          Download Free App
-          <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </button>
-        <button on:click={openModal} class="text-gray-700 hover:text-blue-600 font-semibold text-lg flex items-center">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-            ></path>
-          </svg>
-          Watch Demo
-        </button>
-      </div>
+  <div class="trio">
+    <div class="phone fade side rise" style="animation-delay: 0.55s">
+      <img src="/screens/scan.webp" width="640" height="1340" alt="PicPark camera pointed at a parking sign pole" />
     </div>
-
-    <!-- Floating parking icons -->
-    <div class="absolute top-16 left-8 opacity-60 float-sign" style="animation-delay: 0s;">
-      <svg class="w-12 h-12 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-      </svg>
+    <div class="phone fade main rise" style="animation-delay: 0.3s">
+      <img src="/screens/result.webp" width="640" height="1340" alt="PicPark result: You can park, max 2 hours with parking disc, ends at 16:06" />
     </div>
-    <div class="absolute top-32 right-16 opacity-40 float-sign" style="animation-delay: 2s;">
-      <svg class="w-10 h-10 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-        ></path>
-      </svg>
-    </div>
-    <div class="absolute bottom-32 left-20 opacity-50 float-sign" style="animation-delay: 4s;">
-      <svg class="w-8 h-8 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-      </svg>
-    </div>
-    <div class="absolute bottom-16 right-8 opacity-60 float-sign" style="animation-delay: 1s;">
-      <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-      </svg>
+    <div class="phone fade side rise" style="animation-delay: 0.7s">
+      <img src="/screens/history.webp" width="640" height="1340" alt="PicPark history of past scans marked You can park or No parking" />
     </div>
   </div>
-</div>
+</header>
 
-<!-- How It Works Section -->
-<div class="py-20 bg-white/50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
-      <p class="text-gray-600 text-xl max-w-3xl mx-auto">
-        From confusing parking signs to crystal clear answers in seconds. Advanced AI handles the complexity so you don't have to.
-      </p>
-    </div>
+<section id="signs" class="container signs" aria-labelledby="signs-h">
+  <div class="intro reveal">
+    <h2 id="signs-h" class="display">Every country writes it differently</h2>
+    <p class="lead">Same question, very different signs. Pick a country to see what the sign actually means right now.</p>
+  </div>
 
-    <!-- Process Flow -->
-    <div class="relative mb-16">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-        <!-- Step 1 -->
-        <div class="text-center group relative">
-          <div class="absolute -top-4 -right-4 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">1</div>
-          <div
-            class="mx-auto w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-700 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl"
-          >
-            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-              ></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-bold mb-4 text-gray-900">Snap & Capture</h3>
-          <p class="text-gray-600 text-lg md:mb-4 h-32 md:h-28">
-            Simply point your camera at any parking sign. Advanced optical character recognition captures all text, symbols, and formatting instantly.
-          </p>
-          <div class="bg-blue-50 rounded-xl p-4 text-sm text-blue-800 h-24 flex flex-col justify-center">
-            <div class="flex items-center justify-center space-x-2 mb-2">
-              <span class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></span>
-              <span class="font-medium">Instant capture</span>
+  <div class="tabs" role="group" aria-label="Choose a country">
+    {#each countries as c}
+      <button type="button" class="tab" aria-pressed={c === current} on:click={() => (current = c)}>{c.label}</button>
+    {/each}
+  </div>
+
+  {#key current}
+    <div class="split swap">
+      <div class="sky">
+        <div class="pole" aria-hidden="true"></div>
+        {#if current.id === 'us'}
+          <div class="stack" role="img" aria-label="US sign: 2 hour parking 8am to 6pm Monday through Saturday. Below: no parking 7am to 9am Tuesday, street cleaning.">
+            <div class="drop us green">
+              <div class="f44">2 Hour</div><div class="f32">Parking</div><div class="f26 mt8">8AM - 6PM</div><div class="f22 mt4">Mon thru Sat</div>
             </div>
-            <div class="text-blue-600">Fast photo processing with smart cropping</div>
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="text-center group relative">
-          <div class="absolute -top-4 -right-4 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">2</div>
-          <div
-            class="mx-auto w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl"
-          >
-            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-bold mb-4 text-gray-900">AI Intelligence</h3>
-          <p class="text-gray-600 text-lg md:mb-4 h-32 md:h-28">
-            Sophisticated machine learning algorithms interpret complex parking regulations, time restrictions, permit requirements and local exceptions.
-          </p>
-          <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-4 text-sm h-24 flex items-center">
-            <div class="grid grid-cols-2 gap-3 text-xs justify-items-center w-full">
-              <div class="flex items-center space-x-2">
-                <span class="w-2 h-2 bg-blue-400 rounded-full flex-shrink-0"></span>
-                <span class="text-blue-700">Time parsing</span>
-              </div>
-              <div class="flex items-center space-x-2">
-                <span class="w-2 h-2 bg-purple-400 rounded-full flex-shrink-0"></span>
-                <span class="text-purple-700">Rule analysis</span>
-              </div>
-              <div class="flex items-center space-x-2">
-                <span class="w-2 h-2 bg-green-400 rounded-full flex-shrink-0"></span>
-                <span class="text-green-700">Multi-language</span>
-              </div>
-              <div class="flex items-center space-x-2">
-                <span class="w-2 h-2 bg-orange-400 rounded-full flex-shrink-0"></span>
-                <span class="text-orange-700">Context aware</span>
-              </div>
+            <div class="drop us red" style="animation-delay: 0.12s">
+              <svg aria-hidden="true" width="56" height="56" viewBox="0 0 60 60" class="mx"
+                ><circle cx="30" cy="30" r="25" fill="none" stroke="#C8231E" stroke-width="5" /><text
+                  x="30"
+                  y="41"
+                  text-anchor="middle"
+                  font-size="32"
+                  font-weight="800"
+                  fill="#15181D"
+                  font-family="Barlow Condensed, sans-serif">P</text
+                ><line x1="12" y1="12" x2="48" y2="48" stroke="#C8231E" stroke-width="5" /></svg
+              >
+              <div class="f30 mt4">No parking</div><div class="f26 mt8">7AM - 9AM</div><div class="f22 mt4">Tuesday</div><div class="f18 mt4">Street cleaning</div>
             </div>
           </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="text-center group relative">
-          <div class="absolute -top-4 -right-4 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">3</div>
-          <div
-            class="mx-auto w-24 h-24 bg-gradient-to-br from-green-400 to-blue-500 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-xl"
-          >
-            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-bold mb-4 text-gray-900">Instant Clarity</h3>
-          <p class="text-gray-600 text-lg md:mb-4 h-32 md:h-28">Get a clear YES or NO answer with detailed explanations, time limits, and helpful tips to avoid tickets.</p>
-          <div class="bg-green-50 rounded-xl p-4 h-24 flex flex-col justify-center">
-            <div class="flex items-center justify-center space-x-2 mb-2">
-              <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span class="font-medium text-green-800">You can park here!</span>
+        {:else if current.id === 'de'}
+          <div class="stack" role="img" aria-label="German sign: blue P. Below: parking disc, 2 hours. Below: Monday to Friday 8 to 18.">
+            <div class="drop p-sign"><div>P</div></div>
+            <div class="drop white row" style="animation-delay: 0.1s">
+              <svg aria-hidden="true" width="52" height="52" viewBox="0 0 52 52"
+                ><rect x="1" y="1" width="50" height="50" rx="6" fill="#1D5FAF" /><circle cx="26" cy="26" r="17" fill="#fff" /><path
+                  d="M26 15v11l7 5"
+                  stroke="#15181D"
+                  stroke-width="3.5"
+                  fill="none"
+                  stroke-linecap="round"
+                /></svg
+              >
+              2 Std.
             </div>
-            <div class="text-green-600 text-sm">2hr limit • Mon-Fri 9AM-6PM</div>
-            <div class="text-green-500 text-xs mt-1">⏰ Set reminder for 1h 45min</div>
+            <div class="drop white" style="animation-delay: 0.2s">Mo-Fr<br />8-18 h</div>
           </div>
+        {:else if current.id === 'fr'}
+          <div class="stack" role="img" aria-label="French sign: blue P. Below: paid parking 9h to 19h, except Sundays and public holidays.">
+            <div class="drop p-sign"><div>P</div></div>
+            <div class="drop white wide" style="animation-delay: 0.1s">
+              <div class="f38 caps">Payant</div>
+              <div class="f30 mt8">9h - 19h</div>
+              <div class="f19 mt8">sauf dimanches<br />et jours fériés</div>
+            </div>
+          </div>
+        {:else if current.id === 'uk'}
+          <div class="stack" role="img" aria-label="UK sign: pay at machine, Monday to Saturday 8.30am to 6.30pm, max stay 2 hours, no return within 1 hour.">
+            <div class="drop uk">
+              <div class="uk-top"><span class="uk-p">P</span><span>Pay at machine</span></div>
+              <div>Mon - Sat<br />8.30 am - 6.30 pm</div>
+              <div class="uk-rule">Max stay 2 hours<br />No return within 1 hour</div>
+            </div>
+          </div>
+        {:else}
+          <div class="stack" role="img" aria-label="Swedish sign: blue P. Below: fee 7 to 19. Below: no parking Thursdays 8 to 16, from 1 November to 15 May.">
+            <div class="drop p-sign small"><div>P</div></div>
+            <div class="drop se-fee" style="animation-delay: 0.1s"><div>Avgift<br />7-19</div></div>
+            <div class="drop se-no" style="animation-delay: 0.2s">
+              <svg aria-hidden="true" width="48" height="48" viewBox="0 0 48 48"
+                ><circle cx="24" cy="24" r="20" fill="#1D5FAF" stroke="#C8231E" stroke-width="5" /><line
+                  x1="11"
+                  y1="11"
+                  x2="37"
+                  y2="37"
+                  stroke="#C8231E"
+                  stroke-width="5"
+                /></svg
+              >
+              <span>Torsd 8-16<br />1/11-15/5</span>
+            </div>
+          </div>
+        {/if}
+      </div>
+
+      <div class="answer">
+        <div class="when">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            ><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg
+          >{current.when}
+        </div>
+        <div class="verdict" class:no={!current.ok}>
+          <div class="verdict-inner">
+            <strong>{current.verdict}</strong>
+            <span>{current.detail}</span>
+          </div>
+        </div>
+        <div>
+          <h3>In plain words</h3>
+          <p>{current.plain}</p>
         </div>
       </div>
     </div>
+  {/key}
+</section>
 
-    <!-- Advanced Features -->
-    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8">
-      <div class="flex items-center justify-center mb-8">
-        <svg class="w-6 h-6 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-          ></path>
-        </svg>
-        <h3 class="text-2xl font-bold text-gray-900">Advanced Capabilities</h3>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="text-center">
-          <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mx-auto mb-3">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-          </div>
-          <h4 class="font-semibold text-gray-900 mb-2">Global Coverage</h4>
-          <p class="text-gray-600 text-sm">Works in 50+ countries with local parking rules</p>
+<section id="how" class="container how" aria-labelledby="how-h">
+  <h2 id="how-h" class="display reveal">From sign to answer</h2>
+  <div class="steps-wrap">
+    <div class="road" aria-hidden="true"><div class="road-line"></div></div>
+    <ol class="steps">
+      <li>
+        <span class="marker pop">1</span>
+        <h3>Snap the sign</h3>
+        <p>Fit the whole pole in the photo, including the small plates underneath.</p>
+      </li>
+      <li>
+        <span class="marker pop blue">2</span>
+        <h3>Get one answer</h3>
+        <p>PicPark combines every rule with the day, the time and your vehicle.</p>
+      </li>
+      <li>
+        <span class="marker pop green">3</span>
+        <h3>Park, then relax</h3>
+        <p>Set a reminder and get a nudge before you have to move.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="after" aria-labelledby="after-h">
+  <div class="plate dark">
+    <div class="plate-inner">
+      <div class="container after-body">
+        <div class="intro reveal">
+          <h2 id="after-h" class="display">Everything after yes</h2>
+          <p class="lead">Reminders, history and your own parking stats, in the same app.</p>
         </div>
-        <div class="text-center">
-          <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mx-auto mb-3">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-              ></path>
-            </svg>
+        <div class="bento">
+          <div class="card l1 reveal">
+            <h3>Reminders</h3>
+            <p>5, 10 or 15 minutes before time runs out, or a custom timer.</p>
+            <img class="reminder" src="/screens/reminder.webp" width="780" height="851" loading="lazy" alt="Reminder sheet with 5, 10 and 15 minute options before parking ends at 16:06" />
           </div>
-          <h4 class="font-semibold text-gray-900 mb-2">Smart Reminders</h4>
-          <p class="text-gray-600 text-sm">Auto-set timers before your parking expires</p>
-        </div>
-        <div class="text-center">
-          <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center mx-auto mb-3">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-              ></path>
-            </svg>
+          <div class="tile green l2 reveal">
+            <div>
+              <h3>Honest confidence</h3>
+              <p>Every answer shows how sure PicPark is. Low score? Take a second look.</p>
+            </div>
           </div>
-          <h4 class="font-semibold text-gray-900 mb-2">Secure & Private</h4>
-          <p class="text-gray-600 text-sm">Your photos are processed securely and never stored</p>
-        </div>
-        <div class="text-center">
-          <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center mx-auto mb-3">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
+          <div class="card center reveal">
+            <h3 class="big">Every scan, saved</h3>
+            <p>Look back at any spot you have checked, with the street and time.</p>
+            <div class="phone history">
+              <img src="/screens/history.webp" width="640" height="1340" loading="lazy" alt="History screen listing past scans marked You can park or No parking" />
+            </div>
           </div>
-          <h4 class="font-semibold text-gray-900 mb-2">Ticket Prevention</h4>
-          <p class="text-gray-600 text-sm">Avoid costly mistakes with clear parking guidance</p>
+          <div class="card r1 reveal">
+            <h3>Your vehicle</h3>
+            <p>Car, bike, bus or truck, plus disabled and electric permits. The answer follows.</p>
+            <img class="vehicle" src="/screens/vehicle.webp" width="626" height="199" loading="lazy" alt="Vehicle picker with car, bike, bus and truck, plus Disabled and Electric" />
+          </div>
+          <div class="tile blue r2 reveal">
+            <div>
+              <h3>Your parking stats</h3>
+              <p>Scans per week, average confidence and the areas you park in most.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- How It Looks Section -->
-<div class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl font-bold text-gray-900 mb-4">See It In Action</h2>
-      <p class="text-gray-600 text-lg">Real examples of PicPark analyzing parking signs</p>
-    </div>
+<section id="faq" class="faq-section" aria-labelledby="faq-h">
+  <h2 id="faq-h" class="display reveal">Questions</h2>
+  <div class="reveal faq-wrap"><Faq items={faq} /></div>
+  <p class="more">Something else? <a href="/support">Visit support</a></p>
+</section>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-white rounded-2xl p-6 shadow-lg">
-        <div class="aspect-square bg-gray-200 rounded-xl mb-4 overflow-hidden">
-          <img src="/ParkSignPhoto.jpg" alt="Parking sign photo" class="w-full h-full object-cover" />
-        </div>
-        <h3 class="font-semibold mb-2">Step 1: Take Photo</h3>
-        <p class="text-gray-600 text-sm">Point your camera at any parking sign</p>
-      </div>
-
-      <div class="bg-white rounded-2xl p-6 shadow-lg">
-        <div class="aspect-square bg-gray-200 rounded-xl mb-4 overflow-hidden">
-          <img src="/ParkSignPhoto_Scan.png" alt="AI scanning parking sign" class="w-full h-full object-cover" />
-        </div>
-        <h3 class="font-semibold mb-2">Step 2: AI Analysis</h3>
-        <p class="text-gray-600 text-sm">Advanced AI reads and interprets the sign</p>
-      </div>
-
-      <div class="bg-white rounded-2xl p-6 shadow-lg">
-        <div class="aspect-square bg-gray-200 rounded-xl mb-4 overflow-hidden">
-          <img src="/ParkSignPhoto_Result.png" alt="Parking analysis result" class="w-full h-full object-cover" />
-        </div>
-        <h3 class="font-semibold mb-2">Step 3: Clear Result</h3>
-        <p class="text-gray-600 text-sm">Get instant yes/no with details</p>
-      </div>
+<section class="cta-wrap">
+  <div class="plate yellow reveal">
+    <div class="plate-inner cta">
+      <h2 class="display cta-h">Don't decode it yourself</h2>
+      <p>Free on the App Store. No account needed.</p>
+      <AppStoreButton />
     </div>
   </div>
-</div>
-
-<!-- Download Section -->
-<div id="download" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-4xl font-bold text-gray-900 mb-6">Ready to Park with Confidence?</h2>
-    <p class="text-xl text-gray-600 mb-12">Download the app and never worry about parking tickets again.</p>
-
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-      <a
-        href="https://apps.apple.com/us/app/picpark/id6748095680"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold flex items-center space-x-3 hover:bg-blue-700 transition-colors"
-      >
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-          <path
-            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
-          />
-        </svg>
-        <div class="text-left">
-          <div class="text-xs">Download on the</div>
-          <div class="text-lg">App Store</div>
-        </div>
-      </a>
-      <a href="#" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold flex items-center space-x-3 hover:bg-blue-700 transition-colors">
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-          <path
-            d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"
-          />
-        </svg>
-        <div class="text-left">
-          <div class="text-xs">Get it on</div>
-          <div class="text-lg">Google Play</div>
-        </div>
-      </a>
-    </div>
-
-    <p class="text-gray-500 text-sm">Free download • No account or subscription required</p>
-  </div>
-</div>
-
-<Footer />
+</section>
 
 <style>
-  .float-sign {
-    animation: float 6s ease-in-out infinite;
+  /* Hero */
+  .hero {
+    padding-top: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+  h1 {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(48px, 6vw, 84px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .hero .lead {
+    font-size: 21px;
+    max-width: 30em;
+  }
+  .trio {
+    width: 100%;
+    height: 474px;
+    margin-top: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 32px;
+  }
+  .fade {
+    -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 62%, transparent 100%);
+  }
+  .main {
+    width: 310px;
+    height: 470px;
+    border-width: 11px;
+    border-radius: 52px 52px 0 0;
+    box-shadow: 0 -10px 50px -10px rgba(20, 32, 52, 0.35);
+  }
+  .side {
+    width: 262px;
+    height: 410px;
+    margin-top: 64px;
+    box-shadow: 0 -10px 40px -14px rgba(20, 32, 52, 0.3);
+  }
+  @media (max-width: 900px) {
+    .side {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .rise {
+      animation: phoneUp 1.1s var(--ease) both;
+    }
+  }
+  @keyframes phoneUp {
+    from {
+      opacity: 0;
+      transform: translateY(80px);
+    }
   }
 
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0px) rotate(0deg);
+  /* Country switcher */
+  .signs {
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  .intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .tab {
+    min-height: 48px;
+    padding: 0 22px;
+    border-radius: 999px;
+    border: 2px solid #c9cdc6;
+    background: #fff;
+    color: var(--ink);
+    font: 600 17px var(--body);
+    cursor: pointer;
+    transition:
+      background-color 0.2s,
+      color 0.2s,
+      transform 0.25s var(--ease);
+  }
+  .tab:hover {
+    transform: translateY(-1px);
+  }
+  .tab[aria-pressed='true'] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+    font-weight: 700;
+  }
+  .split {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+  @media (max-width: 900px) {
+    .split {
+      grid-template-columns: minmax(0, 1fr);
     }
-    50% {
-      transform: translateY(-20px) rotate(5deg);
+    .sky {
+      min-height: 360px;
     }
+  }
+  .sky {
+    position: relative;
+    min-height: 480px;
+    padding: 48px 24px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 24px;
+    background: #dde5ee;
+  }
+  .pole {
+    position: absolute;
+    left: 50%;
+    top: 40px;
+    bottom: 0;
+    width: 12px;
+    margin-left: -6px;
+    border-radius: 6px;
+    background: #8e98a3;
+  }
+  .stack {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--display);
+    font-weight: 800;
+    line-height: 1.05;
+    text-align: center;
+  }
+  .us {
+    width: 230px;
+    padding: 14px 10px;
+    border-radius: 10px;
+    background: #fff;
+    border: 4px solid;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .us.green {
+    color: #1e7a3c;
+  }
+  .us.red {
+    color: #c8231e;
+  }
+  .mx {
+    margin: 0 auto;
+  }
+  .p-sign {
+    width: 150px;
+    height: 150px;
+    padding: 7px;
+    border-radius: 14px;
+    background: var(--sign-blue);
+  }
+  .p-sign.small {
+    width: 140px;
+    height: 140px;
+  }
+  .p-sign div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #fff;
+    border-radius: 9px;
+    color: #fff;
+    font-size: 104px;
+    line-height: 1;
+  }
+  .white {
+    width: 190px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #fff;
+    border: 3px solid var(--ink);
+    font-size: 32px;
+  }
+  .white.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    font-size: 34px;
+    line-height: 1;
+  }
+  .white.wide {
+    width: 220px;
+    padding: 14px 10px;
+  }
+  .uk {
+    width: 260px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+    background: #fff;
+    border: 3px solid var(--ink);
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.15;
+    text-align: left;
+  }
+  .uk-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .uk-p {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--sign-blue);
+    color: #fff;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 46px;
+  }
+  .uk-rule {
+    padding-top: 10px;
+    border-top: 2px solid var(--ink);
+    font-size: 19px;
+  }
+  .se-fee {
+    width: 140px;
+    padding: 6px;
+    border-radius: 10px;
+    background: var(--sign-blue);
+  }
+  .se-fee div {
+    padding: 8px;
+    border: 3px solid #fff;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 30px;
+  }
+  .se-no {
+    width: 200px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 10px;
+    background: var(--yellow);
+    border: 4px solid #c8231e;
+    font-size: 28px;
+    text-align: left;
+  }
+  .se-no svg {
+    flex-shrink: 0;
+  }
+  .f44 {
+    font-size: 44px;
+  }
+  .f38 {
+    font-size: 38px;
+  }
+  .f32 {
+    font-size: 32px;
+  }
+  .f30 {
+    font-size: 30px;
+  }
+  .f26 {
+    font-size: 26px;
+  }
+  .f22 {
+    font-size: 22px;
+  }
+  .f19 {
+    font-size: 19px;
+    font-weight: 700;
+  }
+  .f18 {
+    font-size: 18px;
+  }
+  .mt4 {
+    margin-top: 4px;
+  }
+  .mt8 {
+    margin-top: 8px;
+  }
+  .caps {
+    text-transform: uppercase;
+  }
+
+  .answer {
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 22px;
+    border-radius: 24px;
+    background: #fff;
+    border: 1px solid var(--line);
+  }
+  .when {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .verdict {
+    padding: 6px;
+    border-radius: 20px;
+    background: var(--green);
+    color: #fff;
+  }
+  .verdict.no {
+    background: var(--red);
+  }
+  .verdict-inner {
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border: 3px solid #fff;
+    border-radius: 15px;
+  }
+  .verdict strong {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 44px;
+    line-height: 1;
+  }
+  .verdict span {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .answer h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+  }
+  .answer p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .swap {
+      animation: swap 0.5s var(--ease) both;
+    }
+    .drop {
+      animation: drop 0.55s var(--ease) both;
+    }
+  }
+  @keyframes swap {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+  @keyframes drop {
+    from {
+      opacity: 0;
+      transform: translateY(-18px);
+    }
+  }
+
+  /* How it works */
+  .how {
+    padding-top: 140px;
+    padding-bottom: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+  }
+  .how h2 {
+    text-align: center;
+  }
+  .steps-wrap {
+    position: relative;
+    width: 100%;
+  }
+  .road {
+    position: absolute;
+    top: 44px;
+    left: 16.66%;
+    right: 16.66%;
+    height: 6px;
+    overflow: hidden;
+  }
+  .road-line {
+    height: 100%;
+    background: repeating-linear-gradient(90deg, var(--ink) 0 36px, transparent 36px 60px);
+  }
+  .steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+  }
+  .steps li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+  .marker {
+    width: 94px;
+    height: 94px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 5px solid var(--ink);
+    background: #fff;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 48px;
+  }
+  .marker.blue {
+    background: var(--blue);
+    color: #fff;
+  }
+  .marker.green {
+    background: var(--green);
+    color: #fff;
+  }
+  .steps h3 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 32px;
+    text-transform: uppercase;
+  }
+  .steps p {
+    margin: 0;
+    max-width: 19em;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  @media (max-width: 900px) {
+    .steps {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .road {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .road-line {
+        transform-origin: left center;
+        animation: draw linear both;
+        animation-timeline: view();
+        animation-range: entry 30% cover 50%;
+      }
+      .pop {
+        animation: pop linear both;
+        animation-timeline: view();
+        animation-range: entry 20% entry 80%;
+      }
+    }
+  }
+  @keyframes draw {
+    from {
+      transform: scaleX(0);
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  }
+
+  /* Everything after yes */
+  .after {
+    padding: 0 14px;
+  }
+  .after-body {
+    padding-top: 110px;
+    padding-bottom: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 56px;
+  }
+  .after .lead {
+    color: var(--muted-dark);
+    max-width: 30em;
+  }
+  .bento {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 20px;
+  }
+  .l1 {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .l2 {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .center {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+  .r1 {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .r2 {
+    grid-column: 3;
+    grid-row: 2;
+  }
+  @media (max-width: 900px) {
+    .bento {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .bento > * {
+      grid-column: auto;
+      grid-row: auto;
+    }
+  }
+  .card {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+    border-radius: 24px;
+    background: var(--asphalt-2);
+  }
+  .card.center {
+    padding-bottom: 0;
+    align-items: center;
+    text-align: center;
+  }
+  .l1 {
+    padding-bottom: 0;
+  }
+  .bento h3 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+  }
+  .bento h3.big {
+    font-size: 34px;
+  }
+  .bento p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--muted-dark);
+  }
+  .reminder {
+    width: 100%;
+    height: 230px;
+    margin-top: 14px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 18px 18px 0 0;
+  }
+  .vehicle {
+    margin-top: auto;
+    border-radius: 16px;
+  }
+  .history {
+    width: 290px;
+    max-width: 100%;
+    height: 520px;
+    margin-top: 22px;
+  }
+  .tile {
+    padding: 7px;
+    border-radius: 24px;
+  }
+  .tile > div {
+    height: 100%;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    border: 3px solid #fff;
+    border-radius: 18px;
+  }
+  .tile h3 {
+    color: #fff;
+  }
+  .tile.green {
+    background: var(--green);
+  }
+  .tile.green p {
+    color: #e4f3ea;
+  }
+  .tile.blue {
+    background: var(--blue);
+  }
+  .tile.blue p {
+    color: #e4eefa;
+  }
+
+  /* FAQ */
+  .faq-section {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 140px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+  .faq-wrap {
+    width: 100%;
+  }
+  .more {
+    margin: 0;
+    font-size: 18px;
+    color: var(--muted);
+  }
+
+  /* CTA */
+  .cta-wrap {
+    padding: 0 14px;
+  }
+  .cta {
+    padding: 96px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    text-align: center;
+  }
+  .cta-h {
+    font-size: clamp(52px, 7.5vw, 112px);
+    line-height: 0.9;
+  }
+  .cta p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
   }
 </style>

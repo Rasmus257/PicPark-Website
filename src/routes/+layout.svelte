@@ -1,106 +1,148 @@
 <script>
   import '../app.css';
-  import { writable } from 'svelte/store';
-  import { setContext } from 'svelte';
+  import { page } from '$app/stores';
+  import { APP_STORE_URL, SUPPORT_EMAIL } from '$lib/site.js';
 
-  let showModal = writable(false);
-  setContext('modal', showModal);
-
-  function openModal() {
-    showModal.set(true);
-  }
-
-  function closeModal() {
-    showModal.set(false);
-  }
-
-  setContext('openModal', openModal);
+  const links = [
+    { href: '/#signs', label: 'Signs' },
+    { href: '/#how', label: 'How it works' },
+    { href: '/#faq', label: 'FAQ' },
+    { href: '/support', label: 'Support' },
+  ];
 </script>
 
-<main class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
-  <nav class="bg-white/80 backdrop-blur-md shadow-lg border-b border-blue-100">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex items-center">
-          <a href="/" class="flex items-center space-x-2">
-            <img src="/favicon.webp" alt="PicPark Logo" class="w-7 h-7" />
-            <span class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">PicPark</span>
-          </a>
-        </div>
-        <div class="flex items-center space-x-2 sm:space-x-6">
-          <a href="/support" class="text-gray-700 hover:text-blue-600 font-medium transition-colors text-sm sm:text-base">Support</a>
-          <a href="/privacy" class="text-gray-700 hover:text-blue-600 font-medium transition-colors text-sm sm:text-base">Privacy</a>
-          <a
-            href="/#download"
-            class="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-3 py-2 sm:px-4 rounded-full font-medium hover:shadow-lg transition-all text-sm sm:text-base"
-          >
-            Get App
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
-  <slot />
+<nav class="topnav" aria-label="Main">
+  <a class="brand" href="/">
+    <img src="/favicon.png" alt="" width="40" height="40" />
+    <span>PicPark</span>
+  </a>
+  <div class="links">
+    {#each links as link}
+      <a href={link.href} aria-current={$page.url.pathname === link.href ? 'page' : undefined}>{link.label}</a>
+    {/each}
+  </div>
+  <a class="btn download" href={APP_STORE_URL}>Download</a>
+</nav>
 
-  <!-- Demo Modal -->
-  {#if $showModal}
-    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-fade-in" on:click={closeModal}>
-      <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden animate-scale-in" on:click|stopPropagation>
-        <div class="flex justify-between items-center p-6 border-b">
-          <h3 class="text-2xl font-bold text-gray-900">PicPark Demo</h3>
-          <button on:click={closeModal} class="text-gray-400 hover:text-gray-600">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-        <div class="p-6">
-          <div class="aspect-video bg-gray-100 rounded-xl flex items-center justify-center">
-            <div class="text-center text-gray-500">
-              <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-                ></path>
-              </svg>
-              <p class="text-lg font-medium">Demo video placeholder</p>
-              <p class="text-sm">Add your video embed here</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  {/if}
-</main>
+<slot />
+
+<footer>
+  <div class="road" aria-hidden="true"></div>
+  <a class="brand" href="/">
+    <img src="/favicon.png" alt="" width="36" height="36" loading="lazy" />
+    <span>PicPark</span>
+  </a>
+  <nav aria-label="Footer">
+    <a href="/support">Support</a>
+    <a href="/privacy">Privacy</a>
+    <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>
+  </nav>
+  <p>PicPark is not responsible for parking tickets or fines. Always confirm local rules.<br />© {new Date().getFullYear()} PicPark</p>
+</footer>
 
 <style>
-  .animate-fade-in {
-    animation: fadeIn 0.3s ease-out;
+  .topnav {
+    max-width: 1200px;
+    min-height: 76px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+  }
+  .brand {
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 30px;
+  }
+  .brand img {
+    border-radius: 10px;
+  }
+  .links {
+    display: flex;
+    gap: 32px;
+  }
+  .links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .links a:hover,
+  .links a[aria-current='page'] {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 7px;
+  }
+  .download {
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 0 22px;
+    border-radius: 14px;
+    background: var(--blue);
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  .download:hover {
+    color: #fff;
+  }
+  @media (max-width: 720px) {
+    .topnav {
+      display: flex;
+      justify-content: space-between;
+    }
+    .links {
+      display: none;
+    }
   }
 
-  .animate-scale-in {
-    animation: scaleIn 0.3s ease-out;
+  footer {
+    padding: 56px 24px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    text-align: center;
+    color: var(--muted);
   }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  .road {
+    width: 100%;
+    max-width: 1200px;
+    height: 6px;
+    margin-bottom: 18px;
+    background: repeating-linear-gradient(90deg, var(--ink) 0 36px, transparent 36px 60px);
+    opacity: 0.18;
   }
-
-  @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+  footer .brand {
+    justify-self: auto;
+    font-size: 28px;
+  }
+  footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  footer nav a {
+    color: var(--ink);
+  }
+  footer p {
+    margin: 0;
+    max-width: 36em;
+    font-size: 14px;
+    line-height: 1.55;
   }
 </style>

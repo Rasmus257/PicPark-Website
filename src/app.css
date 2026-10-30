@@ -1,3 +1,157 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  --ink: #15181d;
+  --muted: #4a4f57;
+  --paper: #f3f4f1;
+  --line: #daddd6;
+  --blue: #0e5aae;
+  --sign-blue: #1d5faf;
+  --green: #0f7b45;
+  --red: #b42318;
+  --yellow: #ffd21f;
+  --asphalt-2: #1f242b;
+  --muted-dark: #aeb5bf;
+  --display: 'Barlow Condensed', system-ui, sans-serif;
+  --body: 'Barlow', system-ui, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--blue);
+}
+a:hover {
+  color: #0a4486;
+}
+
+:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 3px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Section heading: condensed caps, the road-sign voice */
+.display {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(44px, 5.5vw, 76px);
+  line-height: 0.92;
+}
+
+.lead {
+  margin: 0;
+  max-width: 34em;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.btn {
+  transition:
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -12px rgba(10, 40, 80, 0.5);
+}
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* Sign plate: colored outer rim with an inset border, like a real road sign */
+.plate {
+  border-radius: 36px;
+  padding: 10px;
+}
+.plate > .plate-inner {
+  border-radius: 28px;
+  border: 3px solid;
+}
+.plate.blue {
+  background: var(--blue);
+  color: #fff;
+}
+.plate.blue > .plate-inner {
+  border: 4px solid #fff;
+}
+.plate.dark {
+  background: var(--ink);
+  color: var(--paper);
+}
+.plate.dark > .plate-inner {
+  border-color: #2e343d;
+}
+.plate.yellow {
+  background: var(--yellow);
+  color: var(--ink);
+}
+.plate.yellow > .plate-inner {
+  border: 4px solid var(--ink);
+}
+
+.phone {
+  overflow: hidden;
+  background: #0f1114;
+  border: 10px solid #0f1114;
+  border-bottom: 0;
+  border-radius: 48px 48px 0 0;
+}
+.phone img {
+  width: 100%;
+  height: auto;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+  .in {
+    animation: rise 0.9s var(--ease) both;
+  }
+  /* Scroll reveal: progressive enhancement, content is simply static where unsupported */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}

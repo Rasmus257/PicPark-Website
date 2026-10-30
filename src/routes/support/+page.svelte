@@ -1,149 +1,225 @@
 <script>
-  import Footer from '$lib/components/Footer.svelte';
+  import PageHeader from '$lib/components/PageHeader.svelte';
+  import Faq from '$lib/components/Faq.svelte';
+  import { SITE_URL, SUPPORT_EMAIL, OG_IMAGE } from '$lib/site.js';
+
+  const title = 'PicPark Support: scan tips and common questions';
+  const description =
+    'Help with PicPark, the parking sign reader app. Tips for better scans, answers to common questions, and how to contact support.';
+
+  const faq = [
+    { q: 'Why does a scan sometimes take a while?', a: 'It depends on image quality, how complex the sign is, and how busy our servers are at that moment.' },
+    {
+      q: 'Which countries are supported?',
+      a: 'PicPark works with standard parking signs across many countries and major cities. If a sign is not read correctly, report it from the result screen.',
+    },
+    {
+      q: 'Is my data safe?',
+      a: 'Photos are sent securely for analysis and are never linked to your identity, sold, or used for advertising. Read the <a href="/privacy">privacy policy</a> for exactly what is collected.',
+    },
+    {
+      q: 'What if the app gives a wrong result?',
+      a: 'Use your own judgment in complex situations and check local rules when in doubt. Tap Report Issue on the result so we can improve detection.',
+    },
+    { q: 'Do I need an account?', a: 'No. Download the app and start scanning.' },
+  ];
 </script>
 
 <svelte:head>
-  <title>Support & Help Center - PicPark | AI Parking Assistant</title>
-  <meta name="description" content="Get help with PicPark parking app. FAQ, troubleshooting, and 24/7 support for AI-powered parking sign detection." />
-  <meta name="keywords" content="PicPark support, parking app help, FAQ, troubleshooting, customer service" />
-  <link rel="canonical" href="https://picpark.app/support" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href="{SITE_URL}/support" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{SITE_URL}/support" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={OG_IMAGE} />
+  <meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
 
-<div class="bg-gradient-to-br from-blue-50 to-purple-50 py-16">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-4">PicPark Support & Help Center</h1>
-      <p class="text-xl text-gray-600">Get help with AI-powered parking sign detection. FAQ, troubleshooting, and 24/7 customer support for PicPark users.</p>
+<PageHeader title="How can we help?" lead="Tips for better scans, answers to common questions, and a real person on the other end of the email.">
+  <a class="btn email" href="mailto:{SUPPORT_EMAIL}">
+    <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+      ><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M22 7l-10 6L2 7" /></svg
+    >
+    Email support
+  </a>
+</PageHeader>
+
+<section class="tips-section" aria-labelledby="tips-h">
+  <h2 id="tips-h" class="display reveal">Get a better scan</h2>
+  <div class="tips">
+    <div class="tip reveal">
+      <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#0E5AAE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2" /><rect x="9" y="6" width="6" height="12" rx="1" /></svg
+      >
+      <h3>Whole pole in frame</h3>
+      <p>The small plates underneath often change the answer. Step back until they all fit.</p>
     </div>
-
-    <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
-      <h2 class="text-2xl font-semibold mb-6 flex items-center">
-        <svg class="w-8 h-8 sm:w-6 sm:h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          ></path>
-        </svg>
-        PicPark FAQ - Common Questions
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="border-l-4 border-blue-500 pl-4">
-          <h3 class="font-semibold text-lg text-gray-900">Why does PicPark parking sign scanning take time?</h3>
-          <p class="text-gray-600 mt-2">AI parking sign analysis time depends on image quality, parking sign complexity, and server load during peak hours.</p>
-        </div>
-
-        <div class="border-l-4 border-green-500 pl-4">
-          <h3 class="font-semibold text-lg text-gray-900">Which countries support PicPark parking detection?</h3>
-          <p class="text-gray-600 mt-2">PicPark works worldwide with standard parking signs and regulations across major cities.</p>
-        </div>
-
-        <div class="border-l-4 border-purple-500 pl-4">
-          <h3 class="font-semibold text-lg text-gray-900">Is my parking data safe with PicPark?</h3>
-          <p class="text-gray-600 mt-2">Yes! All parking sign processing happens on your device. We never store or access your photos.</p>
-        </div>
-
-        <div class="border-l-4 border-orange-500 pl-4">
-          <h3 class="font-semibold text-lg text-gray-900">What if the app gives a wrong result?</h3>
-          <p class="text-gray-600 mt-2">Always use your judgment for complex situations. When in doubt, check local regulations.</p>
-        </div>
-      </div>
+    <div class="tip reveal">
+      <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#0E5AAE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg
+      >
+      <h3>Steady, good light</h3>
+      <p>Hold the phone still. At night, turn on the flash from the camera screen.</p>
     </div>
-
-    <div class="bg-white rounded-2xl p-8 shadow-lg">
-      <h2 class="text-2xl font-semibold mb-6 text-center flex items-center justify-center">
-        <svg class="w-8 h-8 sm:w-6 sm:h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
-          ></path>
-        </svg>
-        Need More Help?
-      </h2>
-
-      <div class="text-center max-w-md mx-auto">
-        <p class="text-gray-600 mb-6">Can't find what you're looking for? Send us an email and we'll get back to you.</p>
-
-        <a
-          href="mailto:support@picpark.app"
-          class="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-800 text-white py-3 px-6 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 space-x-2"
+    <div class="tip reveal">
+      <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#0E5AAE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ><path d="M21 12a9 9 0 1 1-3-6.7L21 8" /><path d="M21 3v5h-5" /></svg
+      >
+      <h3>Try another angle</h3>
+      <p>If a result looks off, take a new photo from straight in front of the sign.</p>
+    </div>
+    <div class="tip warn reveal">
+      <div>
+        <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#15181D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          ><path d="M12 3l10 18H2L12 3z" /><path d="M12 10v5M12 18h.01" /></svg
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-            ></path>
-          </svg>
-          <span>Contact Support</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="mt-12 bg-white rounded-2xl p-8 shadow-lg">
-      <h2 class="text-2xl font-semibold mb-6 text-center flex items-center justify-center">
-        <svg class="w-10 h-10 sm:w-6 sm:h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-          ></path>
-        </svg>
-        PicPark Usage Tips & Best Practices
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="text-center">
-          <div class="w-16 h-16 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-            <svg class="w-8 h-8 sm:w-6 sm:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-              ></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-          </div>
-          <h3 class="font-semibold mb-2">Better Parking Sign Photos</h3>
-          <p class="text-sm text-gray-600">Hold your phone steady and ensure good lighting when scanning parking signs for best AI detection results</p>
-        </div>
-        <div class="text-center">
-          <div class="w-16 h-16 sm:w-12 sm:h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-            <svg class="w-8 h-8 sm:w-6 sm:h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="font-semibold mb-2">Try Again</h3>
-          <p class="text-sm text-gray-600">If results seem off, try taking another photo from a different angle</p>
-        </div>
-        <div class="text-center">
-          <div class="w-16 h-16 sm:w-12 sm:h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
-            <svg class="w-8 h-8 sm:w-6 sm:h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="font-semibold mb-2">Double Check</h3>
-          <p class="text-sm text-gray-600">Always verify with local regulations for complex parking situations</p>
-        </div>
+        <h3>Low confidence?</h3>
+        <p>Check the sign yourself, and tap Report Issue on the result so we can fix it.</p>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<Footer />
+<section class="faq-section" aria-labelledby="faq-h">
+  <h2 id="faq-h" class="display reveal">Common questions</h2>
+  <div class="reveal faq-wrap"><Faq items={faq} /></div>
+</section>
+
+<section class="contact-wrap">
+  <div class="plate dark reveal">
+    <div class="plate-inner contact">
+      <h2 class="display">Still need help?</h2>
+      <p>Send us an email and we'll get back to you. A photo of the sign helps.</p>
+      <a class="btn yellow-btn" href="mailto:{SUPPORT_EMAIL}">Email support</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .email,
+  .yellow-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 60px;
+    padding: 0 26px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+  }
+  .email {
+    background: #fff;
+    color: var(--ink);
+  }
+  .yellow-btn {
+    background: var(--yellow);
+    color: var(--ink);
+  }
+  .email:hover,
+  .yellow-btn:hover {
+    color: var(--ink);
+  }
+
+  .tips-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 120px 24px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+  .tips-section h2,
+  .faq-section h2 {
+    text-align: center;
+  }
+  .tips {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+  @media (max-width: 760px) {
+    .tips {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  .tip {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-radius: 24px;
+    background: #fff;
+    border: 1px solid var(--line);
+  }
+  .tip.warn {
+    padding: 7px;
+    border: 0;
+    background: var(--yellow);
+  }
+  .tip.warn > div {
+    height: 100%;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 3px solid var(--ink);
+    border-radius: 18px;
+  }
+  .tip h3 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 28px;
+    text-transform: uppercase;
+  }
+  .tip p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .tip.warn p {
+    color: var(--ink);
+  }
+
+  .faq-section {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 140px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+  .faq-wrap {
+    width: 100%;
+  }
+
+  .contact-wrap {
+    padding: 0 14px;
+  }
+  .contact {
+    padding: 88px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+  .contact h2 {
+    font-size: clamp(44px, 6vw, 88px);
+    line-height: 0.9;
+  }
+  .contact p {
+    margin: 0;
+    max-width: 26em;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--muted-dark);
+  }
+</style>
