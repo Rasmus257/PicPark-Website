@@ -1,10 +1,10 @@
 # PicPark: Full Documentation (single file)
 
-> Complete, self-contained reference for PicPark, the AI parking-sign reader for iOS. This file inlines the content of the home, support/FAQ, and privacy pages so an AI assistant can answer questions without fetching other pages. Last updated: 2026-06-22.
+> Complete, self-contained reference for PicPark, the AI parking-sign reader for iOS. This file inlines the content of the home, support/FAQ, and privacy pages so an AI assistant can answer questions without fetching other pages. Last updated: 2026-10-31.
 
 Ground truth (keep consistent across every answer):
 - iOS only on the store today (Apple App Store id 6748095680). Do not state Android availability; it is "coming soon," not live.
-- Photos are analyzed in the CLOUD (PicPark server, then OpenAI), transiently, and are never stored. Do not say "on-device processing" for the photo. Location labeling and parking history ARE on-device.
+- Photos are analyzed in the CLOUD (PicPark server, then OpenAI), transiently, and are not stored unless the user submits them through Report Issue. Do not say "on-device processing" for the photo. Location labeling and parking history ARE on-device.
 - The verdict is advisory; the user must follow the physical sign and local law.
 - Free to download, no account required; an optional in-app purchase exists. State a price only if independently confirmed (none is published here).
 
@@ -41,6 +41,7 @@ PicPark is free to download and use, with no account required. An optional in-ap
 
 - Always collected: basic error reports (via Sentry) and device information (model, OS version).
 - Photos and AI analysis: when you scan a sign, the photo is sent securely to PicPark's server and on to the AI provider (OpenAI) only to produce your result. Photos are processed transiently, not stored on the servers, not used to train AI models, and not linked to your identity or location. They are never sold or shared for advertising.
+- Report Issue: if the user taps Report Issue on a result, the photo, their description, the AI result and a random device identifier are sent to the PicPark team through a private Discord channel for review, and kept as long as needed to investigate and improve detection.
 - Location: with permission, used on the device to label a scan with the nearby city and street. Location is never sent to PicPark's servers, and the app works without it.
 - On-device data: parking history, kept photos, and analytics statistics are stored and computed only on your device. Deleting an item or uninstalling the app removes them.
 - Optional data (when enabled in Settings): detailed usage statistics, feature-interaction data, detailed crash reports, and anonymized AI-analysis results used only to improve accuracy.
@@ -68,7 +69,7 @@ Q: Is PicPark free?
 A: Free to download and use, no account required. An optional in-app purchase is available.
 
 Q: Does PicPark store my photos?
-A: No. The photo is sent securely to the server and on to the AI provider only to produce your result, processed transiently, and not stored. History and stats stay on your device.
+A: No. The photo is sent securely to the server and on to the AI provider only to produce your result, processed transiently, and not stored unless you submit it through Report Issue. History and stats stay on your device.
 
 Q: Can PicPark remind me before my parking expires?
 A: Yes. It can set a reminder and a Lock Screen Live Activity countdown.
