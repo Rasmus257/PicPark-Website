@@ -147,6 +147,11 @@
         >.
       </p>
       <p>Purchases are tied to a random device identifier rather than your name or email, so they are not linked to your real-world identity.</p>
+      <h3>This website</h3>
+      <p>
+        picpark.app uses Google Analytics to see how the site is used, only if you accept cookies in the banner. You can change your choice any time with Cookie settings at
+        the bottom of every page.
+      </p>
     </section>
 
     <section id="p6">

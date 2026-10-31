@@ -2,6 +2,9 @@
   import '../app.css';
   import { page } from '$app/stores';
   import { APP_STORE_URL, SUPPORT_EMAIL } from '$lib/site.js';
+  import CookieBanner from '$lib/components/CookieBanner.svelte';
+
+  let cookiesOpen = false;
 
   const links = [
     { href: '/#signs', label: 'Signs' },
@@ -38,9 +41,12 @@
     <a href="/support">Support</a>
     <a href="/privacy">Privacy</a>
     <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>
+    <button type="button" on:click={() => (cookiesOpen = true)}>Cookie settings</button>
   </nav>
   <p>PicPark is not responsible for parking tickets or fines. Always confirm local rules.<br />© {new Date().getFullYear()} PicPark</p>
 </footer>
+
+<CookieBanner bind:open={cookiesOpen} />
 
 <style>
   .topnav {
@@ -138,8 +144,17 @@
     font-size: 16px;
     font-weight: 600;
   }
-  footer nav a {
+  footer nav a,
+  footer nav button {
     color: var(--ink);
+  }
+  footer nav button {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
   }
   footer p {
     margin: 0;

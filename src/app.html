@@ -14,15 +14,33 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600;700;800&display=swap"
     />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4G2J85JT43"></script>
+    <!-- Google tag (gtag.js), basic consent mode: nothing loads until the visitor accepts the cookie banner. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag('js', new Date());
-      gtag('config', 'G-4G2J85JT43');
+      function loadAnalytics() {
+        if (window.gaLoaded) return;
+        window.gaLoaded = true;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4G2J85JT43';
+        document.head.appendChild(s);
+        gtag('js', new Date());
+        gtag('config', 'G-4G2J85JT43');
+      }
+      try {
+        if (localStorage.getItem('cookie-consent') === 'granted') loadAnalytics();
+        else
+          // Clears cookies left from an earlier accept, before GA could rewrite them.
+          document.cookie.split('; ').forEach(function (c) {
+            var name = c.split('=')[0];
+            if (name.indexOf('_ga') !== 0) return;
+            document.cookie = name + '=; max-age=0; path=/';
+            document.cookie = name + '=; max-age=0; path=/; domain=.' + location.hostname;
+          });
+      } catch (e) {}
     </script>
     %sveltekit.head%
   </head>
