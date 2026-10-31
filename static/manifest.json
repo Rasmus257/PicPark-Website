@@ -1,16 +1,13 @@
 {
-  "name": "PicPark - Smart Parking Sign Detection",
+  "name": "PicPark: Parking sign reader",
   "short_name": "PicPark",
-  "description": "AI-powered parking sign detection app",
+  "description": "Snap any parking sign and get a clear yes or no.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#2563eb",
+  "background_color": "#F3F4F1",
+  "theme_color": "#F3F4F1",
   "icons": [
-    {
-      "src": "/favicon.webp",
-      "sizes": "192x192",
-      "type": "image/webp"
-    }
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
   ]
 }
