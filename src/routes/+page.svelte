@@ -1,6 +1,7 @@
 <script>
   import AppStoreButton from '$lib/components/AppStoreButton.svelte';
   import Faq from '$lib/components/Faq.svelte';
+  import { onMount } from 'svelte';
   import { SITE_URL, APP_STORE_URL, OG_IMAGE } from '$lib/site.js';
 
   const title = 'PicPark: Can I park here? Parking sign reader app';
@@ -20,16 +21,19 @@
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   };
 
+  // Photos from Wikimedia Commons, cropped; credit lines are required by their licenses.
   const countries = [
     {
       id: 'us',
       label: 'United States',
-      when: 'Tuesday, 08:15',
+      when: 'Friday in June, 08:15',
       ok: false,
       verdict: 'No parking',
-      detail: 'Street cleaning until 9:00 am',
+      detail: 'Street cleaning until 9:00 am. Tow zone.',
       plain:
-        "You can normally park for 2 hours, 8am to 6pm, Monday to Saturday. On Tuesday mornings from 7 to 9 the street is cleaned, so right now you can't park here.",
+        'Normally you can park for 2 hours, 9am to 10pm, Monday to Saturday. But from April to October the street is cleaned on Friday mornings from 7 to 9, and cars left there get towed.',
+      alt: 'Chicago signs on one pole. Top: street cleaning, no parking 7am to 9am Fridays, April 1 to October 31, tow zone. Bottom: two hour parking 9am to 10pm Monday to Saturday.',
+      credit: { title: 'Street Cleaning and Two Hour Parking signs', author: 'Eric Fischer', license: 'CC BY 2.0', licenseUrl: 'https://creativecommons.org/licenses/by/2.0/', source: 'https://commons.wikimedia.org/wiki/File:Street_Cleaning_and_Two_Hour_Parking_signs_(37412426774).jpg' },
     },
     {
       id: 'de',
@@ -37,38 +41,48 @@
       when: 'Wednesday, 10:05',
       ok: true,
       verdict: 'You can park',
-      detail: 'Set your disc to 10:30. Move by 12:30.',
-      plain: 'On weekdays from 8:00 to 18:00 you need a parking disc and can stay up to 2 hours. Set the disc to the next half hour after you arrive.',
+      detail: 'Set your disc to 10:30. Move by 11:30.',
+      plain: 'On working days, Monday to Saturday, from 8:00 to 18:00 you need a parking disc and can stay up to 1 hour. Set the disc to the next half hour after you arrive.',
+      alt: 'German sign: blue P with an arrow to the left. Below: werktags 8 to 18h. Below: parking disc, 1 Std.',
+      credit: { title: 'Zeichen 314 in Neuendettelsau', author: 'Alexander Rahm', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/wiki/File:Zeichen_314_in_Neuendettelsau_20250126_143043.jpg' },
     },
     {
       id: 'fr',
       label: 'France',
-      when: 'Sunday, 14:00',
+      when: 'Tuesday, 13:15',
       ok: true,
       verdict: 'You can park',
-      detail: 'Free today. Paid from Monday 9:00.',
-      plain: 'Parking is paid from 9:00 to 19:00, except on Sundays and public holidays. Today it costs nothing.',
+      detail: 'Free until 14:00. Then set your disc and move by 15:00.',
+      plain: 'With a parking disc you can stay up to 1 hour, from 9:00 to 12:30 and from 14:00 to 19:00. Over lunch there is no limit.',
+      alt: 'French sign: blue P with a parking disc symbol. Below: parking disc, 9h00 to 12h30, 14h00 to 19h00, maxi 1h.',
+      credit: { title: "Civrieux-d'Azergues, Panneau C1b M6c parking à disque", author: 'Sebleouf', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: "https://commons.wikimedia.org/wiki/File:Civrieux-d'Azergues_-_Panneau_C1b_M6c_parking_%C3%A0_disque_(ao%C3%BBt_2018).jpg" },
     },
     {
       id: 'uk',
       label: 'United Kingdom',
-      when: 'Saturday, 17:40',
-      ok: true,
-      verdict: 'You can park',
-      detail: "Pay until 18:30, then it's free.",
-      plain: "Monday to Saturday, 8.30am to 6.30pm, you pay at the machine and can stay 2 hours. If you leave, you can't come back within an hour.",
+      when: 'Saturday, 15:00',
+      ok: false,
+      verdict: 'No parking',
+      detail: 'Permit holders only until 4:00 pm.',
+      plain: 'On Saturdays you can pay at the machine from 9am to 2pm and from 4 to 6.30pm. Between 2 and 4pm, and from 6.30 to 8pm, only zone F permit holders can park here.',
+      alt: 'London parking sign. Monday to Friday: 9am to 6.30pm permit holders F or pay at machine, 6.30 to 8pm permit holders only. Saturday: 9am to 2pm and 4 to 6.30pm permit holders F or pay at machine, 2 to 4pm and 6.30 to 8pm permit holders only.',
+      credit: { title: 'Hammersmith & Fulham roadside parking restriction notice', author: 'DeFacto', license: 'CC BY-SA 2.5', licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.5/', source: 'https://commons.wikimedia.org/wiki/File:Hammersmith_%26_Fulham_roadside_parking_restriction_notice.jpg' },
     },
     {
       id: 'se',
       label: 'Sweden',
-      when: 'Thursday in January, 09:30',
+      when: 'Wednesday in November, 12:30',
       ok: false,
       verdict: 'No parking',
-      detail: 'Street cleaning until 16:00',
-      plain: 'Paid parking on weekdays from 7 to 19. But from 1 November to 15 May, Thursdays 8 to 16 are kept clear for street cleaning.',
+      detail: 'Not allowed until 15:00.',
+      plain: 'This is paid parking, up to 2 hours from 08 to 18. But on Wednesdays from 12 to 15, between 1 October and 30 April, parking is not allowed here.',
+      alt: 'Swedish sign: blue P. Below: Avgift. Below: 2 tim 08 to 18. Below, yellow: no parking Onsdag 12 to 15, 1 okt to 30 april. Below: 0 to 8 m.',
+      credit: { title: 'Parkering-Lkpg-Ekkallan-Datum', author: 'Riiga', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/wiki/File:Parkering-Lkpg-Ekkallan-Datum.jpg' },
     },
   ];
   let current = countries[0];
+  // Warm the cache so switching countries doesn't flash an empty frame.
+  onMount(() => countries.forEach((c) => (new Image().src = `/signs/${c.id}.webp`)));
 
   const faq = [
     {
@@ -139,82 +153,13 @@
 
   {#key current}
     <div class="split swap">
-      <div class="sky">
-        <div class="pole" aria-hidden="true"></div>
-        {#if current.id === 'us'}
-          <div class="stack" role="img" aria-label="US sign: 2 hour parking 8am to 6pm Monday through Saturday. Below: no parking 7am to 9am Tuesday, street cleaning.">
-            <div class="drop us green">
-              <div class="f44">2 Hour</div><div class="f32">Parking</div><div class="f26 mt8">8AM - 6PM</div><div class="f22 mt4">Mon thru Sat</div>
-            </div>
-            <div class="drop us red" style="animation-delay: 0.12s">
-              <svg aria-hidden="true" width="56" height="56" viewBox="0 0 60 60" class="mx"
-                ><circle cx="30" cy="30" r="25" fill="none" stroke="#C8231E" stroke-width="5" /><text
-                  x="30"
-                  y="41"
-                  text-anchor="middle"
-                  font-size="32"
-                  font-weight="800"
-                  fill="#15181D"
-                  font-family="Barlow Condensed, sans-serif">P</text
-                ><line x1="12" y1="12" x2="48" y2="48" stroke="#C8231E" stroke-width="5" /></svg
-              >
-              <div class="f30 mt4">No parking</div><div class="f26 mt8">7AM - 9AM</div><div class="f22 mt4">Tuesday</div><div class="f18 mt4">Street cleaning</div>
-            </div>
-          </div>
-        {:else if current.id === 'de'}
-          <div class="stack" role="img" aria-label="German sign: blue P. Below: parking disc, 2 hours. Below: Monday to Friday 8 to 18.">
-            <div class="drop p-sign"><div>P</div></div>
-            <div class="drop white row" style="animation-delay: 0.1s">
-              <svg aria-hidden="true" width="52" height="52" viewBox="0 0 52 52"
-                ><rect x="1" y="1" width="50" height="50" rx="6" fill="#1D5FAF" /><circle cx="26" cy="26" r="17" fill="#fff" /><path
-                  d="M26 15v11l7 5"
-                  stroke="#15181D"
-                  stroke-width="3.5"
-                  fill="none"
-                  stroke-linecap="round"
-                /></svg
-              >
-              2 Std.
-            </div>
-            <div class="drop white" style="animation-delay: 0.2s">Mo-Fr<br />8-18 h</div>
-          </div>
-        {:else if current.id === 'fr'}
-          <div class="stack" role="img" aria-label="French sign: blue P. Below: paid parking 9h to 19h, except Sundays and public holidays.">
-            <div class="drop p-sign"><div>P</div></div>
-            <div class="drop white wide" style="animation-delay: 0.1s">
-              <div class="f38 caps">Payant</div>
-              <div class="f30 mt8">9h - 19h</div>
-              <div class="f19 mt8">sauf dimanches<br />et jours fériés</div>
-            </div>
-          </div>
-        {:else if current.id === 'uk'}
-          <div class="stack" role="img" aria-label="UK sign: pay at machine, Monday to Saturday 8.30am to 6.30pm, max stay 2 hours, no return within 1 hour.">
-            <div class="drop uk">
-              <div class="uk-top"><span class="uk-p">P</span><span>Pay at machine</span></div>
-              <div>Mon - Sat<br />8.30 am - 6.30 pm</div>
-              <div class="uk-rule">Max stay 2 hours<br />No return within 1 hour</div>
-            </div>
-          </div>
-        {:else}
-          <div class="stack" role="img" aria-label="Swedish sign: blue P. Below: fee 7 to 19. Below: no parking Thursdays 8 to 16, from 1 November to 15 May.">
-            <div class="drop p-sign small"><div>P</div></div>
-            <div class="drop se-fee" style="animation-delay: 0.1s"><div>Avgift<br />7-19</div></div>
-            <div class="drop se-no" style="animation-delay: 0.2s">
-              <svg aria-hidden="true" width="48" height="48" viewBox="0 0 48 48"
-                ><circle cx="24" cy="24" r="20" fill="#1D5FAF" stroke="#C8231E" stroke-width="5" /><line
-                  x1="11"
-                  y1="11"
-                  x2="37"
-                  y2="37"
-                  stroke="#C8231E"
-                  stroke-width="5"
-                /></svg
-              >
-              <span>Torsd 8-16<br />1/11-15/5</span>
-            </div>
-          </div>
-        {/if}
-      </div>
+      <figure class="photo">
+        <img src="/signs/{current.id}.webp" width="1000" height="1000" alt={current.alt} />
+        <figcaption>
+          <a href={current.credit.source} target="_blank" rel="noopener">{current.credit.title}</a> by {current.credit.author},
+          <a href={current.credit.licenseUrl} target="_blank" rel="noopener license">{current.credit.license}</a>, cropped
+        </figcaption>
+      </figure>
 
       <div class="answer">
         <div class="when">
@@ -433,209 +378,48 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
+    gap: 10px 20px;
+  }
+  .answer {
+    grid-column: 2;
+    grid-row: 1;
   }
   @media (max-width: 900px) {
     .split {
       grid-template-columns: minmax(0, 1fr);
+      row-gap: 20px;
     }
-    .sky {
-      min-height: 360px;
+    .photo {
+      row-gap: 10px;
+    }
+    .answer {
+      grid-column: auto;
+      grid-row: auto;
     }
   }
-  .sky {
-    position: relative;
-    min-height: 480px;
-    padding: 48px 24px;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
+  /* Subgrid puts the photo and answer card in one row, with the credit underneath; the photo fills that row. */
+  .photo {
+    margin: 0;
+    grid-row: span 2;
+    display: grid;
+    grid-template-rows: subgrid;
+  }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
     border-radius: 24px;
     background: #dde5ee;
   }
-  .pole {
-    position: absolute;
-    left: 50%;
-    top: 40px;
-    bottom: 0;
-    width: 12px;
-    margin-left: -6px;
-    border-radius: 6px;
-    background: #8e98a3;
+  .photo figcaption {
+    padding-left: 4px;
+    color: var(--muted);
+    font-size: 13px;
   }
-  .stack {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    font-family: var(--display);
-    font-weight: 800;
-    line-height: 1.05;
-    text-align: center;
+  .photo figcaption a {
+    color: inherit;
   }
-  .us {
-    width: 230px;
-    padding: 14px 10px;
-    border-radius: 10px;
-    background: #fff;
-    border: 4px solid;
-    text-transform: uppercase;
-    line-height: 1;
-  }
-  .us.green {
-    color: #1e7a3c;
-  }
-  .us.red {
-    color: #c8231e;
-  }
-  .mx {
-    margin: 0 auto;
-  }
-  .p-sign {
-    width: 150px;
-    height: 150px;
-    padding: 7px;
-    border-radius: 14px;
-    background: var(--sign-blue);
-  }
-  .p-sign.small {
-    width: 140px;
-    height: 140px;
-  }
-  .p-sign div {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 3px solid #fff;
-    border-radius: 9px;
-    color: #fff;
-    font-size: 104px;
-    line-height: 1;
-  }
-  .white {
-    width: 190px;
-    padding: 12px;
-    border-radius: 8px;
-    background: #fff;
-    border: 3px solid var(--ink);
-    font-size: 32px;
-  }
-  .white.row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    font-size: 34px;
-    line-height: 1;
-  }
-  .white.wide {
-    width: 220px;
-    padding: 14px 10px;
-  }
-  .uk {
-    width: 260px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-radius: 10px;
-    background: #fff;
-    border: 3px solid var(--ink);
-    font-family: var(--body);
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 1.15;
-    text-align: left;
-  }
-  .uk-top {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .uk-p {
-    width: 58px;
-    height: 58px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background: var(--sign-blue);
-    color: #fff;
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 46px;
-  }
-  .uk-rule {
-    padding-top: 10px;
-    border-top: 2px solid var(--ink);
-    font-size: 19px;
-  }
-  .se-fee {
-    width: 140px;
-    padding: 6px;
-    border-radius: 10px;
-    background: var(--sign-blue);
-  }
-  .se-fee div {
-    padding: 8px;
-    border: 3px solid #fff;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 30px;
-  }
-  .se-no {
-    width: 200px;
-    padding: 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-radius: 10px;
-    background: var(--yellow);
-    border: 4px solid #c8231e;
-    font-size: 28px;
-    text-align: left;
-  }
-  .se-no svg {
-    flex-shrink: 0;
-  }
-  .f44 {
-    font-size: 44px;
-  }
-  .f38 {
-    font-size: 38px;
-  }
-  .f32 {
-    font-size: 32px;
-  }
-  .f30 {
-    font-size: 30px;
-  }
-  .f26 {
-    font-size: 26px;
-  }
-  .f22 {
-    font-size: 22px;
-  }
-  .f19 {
-    font-size: 19px;
-    font-weight: 700;
-  }
-  .f18 {
-    font-size: 18px;
-  }
-  .mt4 {
-    margin-top: 4px;
-  }
-  .mt8 {
-    margin-top: 8px;
-  }
-  .caps {
-    text-transform: uppercase;
-  }
-
   .answer {
     padding: 36px;
     display: flex;
@@ -695,20 +479,11 @@
     .swap {
       animation: swap 0.5s var(--ease) both;
     }
-    .drop {
-      animation: drop 0.55s var(--ease) both;
-    }
   }
   @keyframes swap {
     from {
       opacity: 0;
       transform: translateY(14px);
-    }
-  }
-  @keyframes drop {
-    from {
-      opacity: 0;
-      transform: translateY(-18px);
     }
   }
 
