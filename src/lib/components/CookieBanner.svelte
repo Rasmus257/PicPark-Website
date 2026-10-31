@@ -6,7 +6,7 @@
 
   onMount(() => {
     try {
-      open = !localStorage.getItem(KEY);
+      open = document.documentElement.dataset.consent !== 'implied' && !localStorage.getItem(KEY);
     } catch {
       open = true;
     }
