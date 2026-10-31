@@ -81,8 +81,8 @@
       <p>The resulting analysis is saved only in your device's local history.</p>
       <h3>Reporting an issue</h3>
       <p>
-        If you tap Report Issue on a result, the photo, your description, the AI result and your random device identifier are sent to our team through a private Discord channel so
-        we can review the problem. Reports are kept for as long as we need them to investigate and improve detection.
+        If you tap Report Issue on a result, the photo, your description, the AI result and your random device identifier are sent to us so we can review the
+        problem. Reports are kept for as long as we need them to investigate and improve detection.
       </p>
       <h3>Location</h3>
       <p>
