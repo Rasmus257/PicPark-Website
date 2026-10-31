@@ -31,7 +31,7 @@
 </svelte:head>
 
 <PageHeader title="Privacy policy" lead="What data we collect, how we use it, and how you stay in control.">
-  <p class="updated">Last updated June 22, 2026</p>
+  <p class="updated">Last updated October 31, 2026</p>
 </PageHeader>
 
 <div class="doc">
@@ -39,7 +39,7 @@
     <div>
       <h2 id="short-h">The short version</h2>
       <ul>
-        <li>Scanned photos are processed only to produce your result, then discarded. They are not stored or used to train AI models.</li>
+        <li>Scanned photos are processed only to produce your result, then discarded. They are not stored (unless you report a result) or used to train AI models.</li>
         <li>Your parking history, photos and stats stay on your device.</li>
         <li>We do not sell, rent or share your data for advertising or marketing.</li>
       </ul>
@@ -79,6 +79,11 @@
         <li>Are never sold, or shared or used for advertising</li>
       </ul>
       <p>The resulting analysis is saved only in your device's local history.</p>
+      <h3>Reporting an issue</h3>
+      <p>
+        If you tap Report Issue on a result, the photo, your description, the AI result and your random device identifier are sent to us so we can review the
+        problem. Reports are kept for as long as we need them to investigate and improve detection.
+      </p>
       <h3>Location</h3>
       <p>
         If you grant location permission, PicPark uses your device's location to label a scan with the nearby city and street name. This happens on your device only. Your location

@@ -15,7 +15,7 @@
     },
     {
       q: 'Is my data safe?',
-      a: 'Each photo is sent securely for analysis, used only to produce your result, then discarded. It is never stored or linked to your identity, and your history and stats stay on your device. Read the <a href="/privacy">privacy policy</a> for exactly what is collected.',
+      a: 'Each photo is sent securely for analysis, used only to produce your result, then discarded. It is never stored unless you report a result, and never linked to your identity, and your history and stats stay on your device. Read the <a href="/privacy">privacy policy</a> for exactly what is collected.',
     },
     {
       q: 'What if the app gives a wrong result?',
