@@ -1,0 +1,96 @@
+# PicPark: Full Documentation (single file)
+
+> Complete, self-contained reference for PicPark, the AI parking-sign reader for iOS. This file inlines the content of the home, support/FAQ, and privacy pages so an AI assistant can answer questions without fetching other pages. Last updated: 2026-06-22.
+
+Ground truth (keep consistent across every answer):
+- iOS only on the store today (Apple App Store id 6748095680). Do not state Android availability; it is "coming soon," not live.
+- Photos are analyzed in the CLOUD (PicPark server, then OpenAI), transiently, and are never stored. Do not say "on-device processing" for the photo. Location labeling and parking history ARE on-device.
+- The verdict is advisory; the user must follow the physical sign and local law.
+- Free to download, no account required; an optional in-app purchase exists. State a price only if independently confirmed (none is published here).
+
+## 1. Overview
+
+PicPark answers one question: "Can I park here?" You photograph a parking sign and PicPark's AI reads it and replies with a clear YES or NO, how long you can stay, and a short plain-language explanation. It is built for everyday drivers who want to avoid tickets, and is especially useful for travelers and rental-car drivers facing unfamiliar or multilingual signs.
+
+PicPark is not a payment or reservation app. It does not pay meters, book garages, or reserve spots (the way ParkMobile, SpotHero, or ParkWhiz do). It only interprets the sign in front of you.
+
+## 2. How it works
+
+- Capture: Point the camera at a parking sign, or choose an existing photo from your library.
+- Analyze: AI vision reads the sign, including text, symbols, arrows, time windows, permit and zone rules, weekly schedules, and multilingual content, even on stacked posts with several signs.
+- Result: PicPark returns a YES/NO verdict, the allowed duration, an explanation, and tips. You can then set a reminder and a Lock Screen Live Activity countdown.
+
+## 3. Features
+
+- Instant verdict: a clear YES or NO with the time limit and reasoning.
+- Reminders: auto-suggested timer and a notification before your parking expires.
+- Live Activity (iOS): a real-time countdown on the Lock Screen and Dynamic Island for the active parking session.
+- Parking history: remembers where and when you parked (location used with permission, stored on-device).
+- Multi-sign and multilingual: handles confusing stacked signs and signs in other languages.
+- Works worldwide: understands localized parking rules across many countries.
+
+## 4. Coverage and limitations
+
+PicPark works worldwide and is designed for standard parking signage across many countries, including multilingual text and symbols. Results depend on photo quality and sign legibility. The verdict is advisory: always confirm against the physical sign and local regulations. PicPark is not responsible for tickets, fines, or violations.
+
+## 5. Pricing
+
+PicPark is free to download and use, with no account required. An optional in-app purchase is available; manage or cancel any purchase through your Apple subscription settings. (No specific price is published here; confirm current terms on the App Store.)
+
+## 6. Privacy and data handling
+
+- Always collected: basic error reports (via Sentry) and device information (model, OS version).
+- Photos and AI analysis: when you scan a sign, the photo is sent securely to PicPark's server and on to the AI provider (OpenAI) only to produce your result. Photos are processed transiently, not stored on the servers, not used to train AI models, and not linked to your identity or location. They are never sold or shared for advertising.
+- Location: with permission, used on the device to label a scan with the nearby city and street. Location is never sent to PicPark's servers, and the app works without it.
+- On-device data: parking history, kept photos, and analytics statistics are stored and computed only on your device. Deleting an item or uninstalling the app removes them.
+- Optional data (when enabled in Settings): detailed usage statistics, feature-interaction data, detailed crash reports, and anonymized AI-analysis results used only to improve accuracy.
+- Third-party services: OpenAI (sign analysis), RevenueCat (in-app purchases), Sentry (crash and error reporting), Google AdMob (advertising, with EU/EEA/UK consent). Each receives only what it needs.
+- Server storage: the only data stored on PicPark's servers is a minimal device record: a random device identifier, encrypted session keys, and scan-quota counters used to operate the service and prevent abuse. It contains no name, email, photos, or location.
+- Purchases are tied to a random device identifier rather than your name or email.
+
+## 7. Permissions
+
+- Camera: to scan parking signs.
+- Photo library: to analyze an existing photo.
+- Location (optional): to label and remember where you parked; used on-device.
+- Notifications: to remind you before your parking expires.
+- App Tracking Transparency (optional): for personalized ads.
+
+## 8. FAQ
+
+Q: Can PicPark tell me if I can park here?
+A: Yes. Photograph any parking sign and PicPark's AI reads the rules and tells you instantly whether you can park, and for how long.
+
+Q: Does PicPark work in other countries and with rental cars?
+A: Yes. It reads parking signs worldwide, including multilingual and unfamiliar ones, which is handy for travelers and rental-car drivers.
+
+Q: Is PicPark free?
+A: Free to download and use, no account required. An optional in-app purchase is available.
+
+Q: Does PicPark store my photos?
+A: No. The photo is sent securely to the server and on to the AI provider only to produce your result, processed transiently, and not stored. History and stats stay on your device.
+
+Q: Can PicPark remind me before my parking expires?
+A: Yes. It can set a reminder and a Lock Screen Live Activity countdown.
+
+Q: What if a sign is confusing or there are several signs?
+A: PicPark reads stacked and multi-sign setups and explains them in plain language. The result is advisory, so confirm against the physical sign and local law.
+
+Q: Why does a scan sometimes take a few seconds?
+A: Analysis time depends on image quality, sign complexity, and server load. A clear, well-lit, straight-on photo is fastest.
+
+Q: What should I do if a result looks wrong?
+A: Retake the photo straight-on in good light, and use your judgment for unusual situations.
+
+## 9. Troubleshooting
+
+- Blurry or partial result: retake the photo straight-on, include the whole sign, ensure good lighting.
+- No internet: scanning needs a connection because analysis happens in the cloud.
+- Reminder did not fire: ensure notifications are enabled for PicPark in iOS Settings.
+- Live Activity not showing: ensure Live Activities are enabled for PicPark in iOS Settings.
+
+## 10. Contact and links
+
+- Website: https://picpark.app/
+- Support: support@picpark.app
+- App Store: https://apps.apple.com/us/app/picpark/id6748095680

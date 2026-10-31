@@ -86,7 +86,7 @@
     },
     {
       q: 'What happens to my photos?',
-      a: 'Photos are sent securely for analysis and are never linked to your identity, sold or used for advertising. The <a href="/privacy">privacy policy</a> has the details.',
+      a: 'Each photo is sent securely for analysis, used only to produce your result, then discarded. It is never stored or linked to your identity. Your history stays on your phone. The <a href="/privacy">privacy policy</a> has the details.',
     },
   ];
 </script>
