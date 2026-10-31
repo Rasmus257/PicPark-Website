@@ -3,14 +3,14 @@
   import { SITE_URL, SUPPORT_EMAIL, OG_IMAGE } from '$lib/site.js';
 
   const title = 'PicPark Privacy Policy';
-  const description = 'What data PicPark collects, how it is used, and how you stay in control. Photos are never linked to your identity or sold.';
+  const description = 'What data PicPark collects, how it is used, and how you stay in control. Scanned photos are processed to produce your result, then discarded.';
 
   const toc = [
     ['p1', 'Our approach'],
     ['p2', 'Data we collect'],
-    ['p3', 'How we use it'],
-    ['p4', 'Third parties'],
-    ['p5', 'Ads'],
+    ['p3', 'On-device data'],
+    ['p4', 'How we use it'],
+    ['p5', 'Third parties'],
     ['p6', 'Security'],
     ['p7', 'Your control'],
     ['p8', 'Updates'],
@@ -31,7 +31,7 @@
 </svelte:head>
 
 <PageHeader title="Privacy policy" lead="What data we collect, how we use it, and how you stay in control.">
-  <p class="updated">Last updated 03/12/2025</p>
+  <p class="updated">Last updated June 22, 2026</p>
 </PageHeader>
 
 <div class="doc">
@@ -39,9 +39,9 @@
     <div>
       <h2 id="short-h">The short version</h2>
       <ul>
-        <li>Photos are sent securely for analysis and never linked to your identity or location.</li>
+        <li>Scanned photos are processed only to produce your result, then discarded. They are not stored or used to train AI models.</li>
+        <li>Your parking history, photos and stats stay on your device.</li>
         <li>We do not sell, rent or share your data for advertising or marketing.</li>
-        <li>You can turn extra data collection and ad preferences on or off in the app's settings.</li>
       </ul>
     </div>
   </section>
@@ -54,31 +54,37 @@
 
   <article>
     <section id="p1">
-      <h2>Privacy-first AI design</h2>
+      <h2>Our approach</h2>
       <p>
-        PicPark uses AI technology to interpret parking signs securely through cloud-based processing. Your photos are transmitted securely for analysis and are never linked to your
-        identity.
+        PicPark uses AI to read parking signs. When you scan a sign, the photo is sent securely to our server and on to our AI provider for analysis. It is processed only to produce
+        your result and is never linked to your identity. Your parking history, photos, and stats stay on your device.
       </p>
     </section>
 
     <section id="p2">
       <h2>Data we collect</h2>
-      <h3>Essential data (always collected)</h3>
+      <h3>Always collected</h3>
       <ul>
-        <li>Basic error reports: technical information and logs used to diagnose crashes</li>
+        <li>Basic error reports (via Sentry): technical logs used to diagnose crashes and performance issues</li>
         <li>Device information, such as model and operating system version</li>
       </ul>
-      <h3>Image data</h3>
+      <h3>Photos and AI analysis</h3>
       <p>
-        When you analyze a parking sign, the image may be temporarily uploaded to our servers for AI processing. A limited number of images are securely stored for the sole purpose of
-        training and improving the AI detection model. These images:
+        When you scan a parking sign, the photo is sent securely to our server and then to our AI provider (OpenAI) to read the sign and work out the parking rules. Your photos:
       </p>
       <ul>
-        <li>Are not linked to any personal identifiers or location data</li>
+        <li>Are processed transiently to generate your result, then discarded (not stored on our servers)</li>
+        <li>Are not used to train AI models</li>
+        <li>Are not linked to your identity or location</li>
         <li>Are never sold, shared, or used for advertising</li>
-        <li>Are periodically deleted once no longer needed for model improvement</li>
       </ul>
-      <h3>Optional data (when enabled)</h3>
+      <p>The resulting analysis is saved only in your device's local history.</p>
+      <h3>Location</h3>
+      <p>
+        If you grant location permission, PicPark uses your device's location to label a scan with the nearby city and street name. This happens on your device only. Your location
+        is never sent to our servers. You can deny or revoke this permission at any time, and the app still works without it.
+      </p>
+      <h3>Optional, when enabled</h3>
       <ul>
         <li>Detailed app usage statistics</li>
         <li>Feature interaction data</li>
@@ -88,6 +94,14 @@
     </section>
 
     <section id="p3">
+      <h2>On-device data</h2>
+      <p>
+        Your parking history, the photos you keep, and the statistics shown on the Analytics screen are stored and computed only on your device. They are never uploaded to our
+        servers, and deleting an item or uninstalling the app removes them.
+      </p>
+    </section>
+
+    <section id="p4">
       <h2>How we use your data</h2>
       <p>We use the collected information solely to:</p>
       <ul>
@@ -99,50 +113,34 @@
       <p class="callout">We do not sell, rent, or share your data with any third parties for advertising or marketing purposes.</p>
     </section>
 
-    <section id="p4">
-      <h2>Third-party services</h2>
-      <ul>
-        <li>PicPark may use trusted third-party tools, such as RevenueCat for managing in-app purchases</li>
-        <li>These services only collect information necessary for their core functionality</li>
-        <li>All transactions are handled anonymously and are not linked to personal identifiers</li>
-      </ul>
-    </section>
-
     <section id="p5">
-      <h2>AdMob / Google Ads</h2>
-      <p>PicPark displays advertisements via Google AdMob to support the free app experience.</p>
+      <h2>Third-party services</h2>
+      <p>A few trusted services help run PicPark. Each receives only the data it needs and is bound by its own privacy policy:</p>
+      <ul>
+        <li><strong>OpenAI</strong>: analyzes the parking-sign photos you scan</li>
+        <li><strong>RevenueCat</strong>: manages in-app purchases</li>
+        <li><strong>Sentry</strong>: crash and error reporting</li>
+        <li><strong>Google AdMob</strong>: advertising</li>
+      </ul>
       <div class="notice">
         <div>
           <h3>EU/EEA/UK users</h3>
-          <p>Users in the EU/EEA/UK may be asked for consent to serve personalized or non-personalized ads through our consent management platform.</p>
+          <p>Users in the EU/EEA/UK may be asked for consent before ads are shown.</p>
         </div>
       </div>
-      <h3>Data collected by ad services</h3>
-      <ul>
-        <li>Device identifiers (IDFA/AAID) for ad targeting and measurement</li>
-        <li>Usage data to serve relevant advertisements</li>
-        <li>Ad performance metrics and analytics</li>
-      </ul>
-      <h3>Your ad preferences</h3>
-      <p>You can manage your advertising preferences through:</p>
-      <ul>
-        <li>The consent form presented when you first use the app</li>
-        <li>App settings menu for ongoing preference management</li>
-      </ul>
-      <p>
-        For more information about Google's advertising practices, see <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer"
-          >Google's Privacy Policy for Ad Services</a
-        >.
-      </p>
+      <p>Purchases are tied to a random device identifier rather than your name or email, so they are not linked to your real-world identity.</p>
     </section>
 
     <section id="p6">
       <h2>Data security</h2>
       <ul>
-        <li>All data transmission occurs securely, and any stored information resides on protected servers</li>
-        <li>We retain only what's necessary to provide and improve PicPark</li>
-        <li>If you uninstall the app, any associated data is automatically deleted after a short retention period</li>
-        <li>PicPark does not sell, share, or expose personal data to any third party</li>
+        <li>All data is transmitted securely over encrypted connections</li>
+        <li>
+          The only information stored on our servers is a minimal device record: a random device identifier, encrypted session keys, and scan-quota counters used to operate the
+          service and prevent abuse
+        </li>
+        <li>This record contains no name, email, photos, or location</li>
+        <li>We retain it only as long as necessary to run PicPark, and we never sell or share your personal information</li>
       </ul>
     </section>
 
@@ -150,23 +148,22 @@
       <h2>Your control</h2>
       <ul>
         <li>You remain in control of your data</li>
-        <li>You can enable or disable additional data collection at any time within the app's settings</li>
-        <li>Even when disabled, we continue to collect only minimal technical information required for the app to function reliably</li>
+        <li>You can enable or disable additional data collection any time in the app's settings</li>
+        <li>Even when disabled, we collect only the minimal technical information needed for the app to work reliably</li>
       </ul>
     </section>
 
     <section id="p8">
       <h2>Updates to this policy</h2>
-      <p>
-        We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy in the app and on this page. Changes are effective
-        immediately after they are posted.
-      </p>
+      <p>We may update this policy from time to time. We'll post any changes in the app and on this page, and they take effect once posted.</p>
     </section>
 
     <section id="p9">
       <h2>Disclaimer</h2>
-      <p>PicPark is not responsible for any parking tickets, fines, or violations that may occur while using the app.</p>
-      <p>Users are solely responsible for confirming local parking rules and regulations.</p>
+      <p>
+        PicPark is not responsible for any parking tickets, fines, or violations that may occur while using the app. The verdict is advisory, so always confirm against the
+        physical sign and local regulations.
+      </p>
     </section>
   </article>
 </div>
@@ -175,7 +172,7 @@
   <div class="plate dark reveal">
     <div class="plate-inner contact">
       <h2 class="display">Questions or concerns?</h2>
-      <p>If you have any questions about our privacy practices, contact us.</p>
+      <p>If you have any questions about our privacy practices, get in touch.</p>
       <a class="btn mail" href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>
     </div>
   </div>
