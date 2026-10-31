@@ -168,6 +168,9 @@
         <li>You remain in control of your data</li>
         <li>You can enable or disable additional data collection any time in the app's settings</li>
         <li>Even when disabled, we collect only the minimal technical information needed for the app to work reliably</li>
+        <li>
+          To request deletion of data we hold about you, such as reports you have sent, email <a href="mailto:{SUPPORT_EMAIL}">{SUPPORT_EMAIL}</a>
+        </li>
       </ul>
     </section>
 
