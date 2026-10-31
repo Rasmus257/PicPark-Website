@@ -1,6 +1,7 @@
 <script>
   import AppStoreButton from '$lib/components/AppStoreButton.svelte';
   import Faq from '$lib/components/Faq.svelte';
+  import { onMount } from 'svelte';
   import { SITE_URL, APP_STORE_URL, OG_IMAGE } from '$lib/site.js';
 
   const title = 'PicPark: Can I park here? Parking sign reader app';
@@ -64,7 +65,7 @@
       verdict: 'No parking',
       detail: 'Permit holders only until 4:00 pm.',
       plain: 'On Saturdays you can pay at the machine from 9am to 2pm and from 4 to 6.30pm. Between 2 and 4pm, and from 6.30 to 8pm, only zone F permit holders can park here.',
-      alt: 'London parking sign in four panels. Monday to Friday: 9am to 6.30pm permit holders F or pay at machine, 6.30 to 8pm permit holders only. Saturday: 9am to 2pm and 4 to 6.30pm permit holders F or pay at machine, 2 to 4pm and 6.30 to 8pm permit holders only.',
+      alt: 'London parking sign. Monday to Friday: 9am to 6.30pm permit holders F or pay at machine, 6.30 to 8pm permit holders only. Saturday: 9am to 2pm and 4 to 6.30pm permit holders F or pay at machine, 2 to 4pm and 6.30 to 8pm permit holders only.',
       credit: { author: 'DeFacto', license: 'CC BY-SA 2.5', licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.5/', source: 'https://commons.wikimedia.org/wiki/File:Hammersmith_%26_Fulham_roadside_parking_restriction_notice.jpg' },
     },
     {
@@ -80,6 +81,8 @@
     },
   ];
   let current = countries[0];
+  // Warm the cache so switching countries doesn't flash an empty frame.
+  onMount(() => countries.forEach((c) => (new Image().src = `/signs/${c.id}.webp`)));
 
   const faq = [
     {
@@ -394,7 +397,7 @@
       grid-row: auto;
     }
   }
-  /* Subgrid keeps the answer card as tall as the photo, with the credit underneath. */
+  /* Subgrid puts the photo and answer card in one row, with the credit underneath; the photo fills that row. */
   .photo {
     margin: 0;
     grid-row: span 2;
@@ -403,7 +406,7 @@
   }
   .photo img {
     width: 100%;
-    height: auto;
+    height: 100%;
     aspect-ratio: 1;
     object-fit: cover;
     border-radius: 24px;
