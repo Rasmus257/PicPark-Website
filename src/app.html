@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-consent="%consent%">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,15 +14,36 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600;700;800&display=swap"
     />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4G2J85JT43"></script>
+    <!-- Google tag (gtag.js), basic consent mode: where hooks.server.js marks consent required, GA doesn't load until the visitor accepts. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag('js', new Date());
-      gtag('config', 'G-4G2J85JT43');
+      function loadAnalytics() {
+        if (window.gaLoaded) return;
+        window.gaLoaded = true;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4G2J85JT43';
+        document.head.appendChild(s);
+        gtag('js', new Date());
+        gtag('config', 'G-4G2J85JT43');
+      }
+      try {
+        var choice = localStorage.getItem('cookie-consent');
+        if (choice === 'granted' || (choice !== 'denied' && document.documentElement.dataset.consent === 'implied')) loadAnalytics();
+        else
+          // Clears cookies left from an earlier accept, before GA could rewrite them.
+          // GA sets them on the top domain, so www.picpark.app has to clear .picpark.app too.
+          document.cookie.split('; ').forEach(function (c) {
+            var name = c.split('=')[0];
+            if (name.indexOf('_ga') !== 0) return;
+            document.cookie = name + '=; max-age=0; path=/';
+            var parts = location.hostname.split('.');
+            for (var i = 0; i < parts.length - 1; i++) document.cookie = name + '=; max-age=0; path=/; domain=.' + parts.slice(i).join('.');
+          });
+      } catch (e) {}
     </script>
     %sveltekit.head%
   </head>
