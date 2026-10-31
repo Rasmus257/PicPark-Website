@@ -33,7 +33,7 @@
       plain:
         'Normally you can park for 2 hours, 9am to 10pm, Monday to Saturday. But from April to October the street is cleaned on Friday mornings from 7 to 9, and cars left there get towed.',
       alt: 'Chicago signs on one pole. Top: street cleaning, no parking 7am to 9am Fridays, April 1 to October 31, tow zone. Bottom: two hour parking 9am to 10pm Monday to Saturday.',
-      credit: { author: 'Eric Fischer', license: 'CC BY 2.0', licenseUrl: 'https://creativecommons.org/licenses/by/2.0/', source: 'https://commons.wikimedia.org/wiki/File:Street_Cleaning_and_Two_Hour_Parking_signs_(37412426774).jpg' },
+      credit: { title: 'Street Cleaning and Two Hour Parking signs', author: 'Eric Fischer', license: 'CC BY 2.0', licenseUrl: 'https://creativecommons.org/licenses/by/2.0/', source: 'https://commons.wikimedia.org/wiki/File:Street_Cleaning_and_Two_Hour_Parking_signs_(37412426774).jpg' },
     },
     {
       id: 'de',
@@ -44,7 +44,7 @@
       detail: 'Set your disc to 10:30. Move by 11:30.',
       plain: 'On working days, Monday to Saturday, from 8:00 to 18:00 you need a parking disc and can stay up to 1 hour. Set the disc to the next half hour after you arrive.',
       alt: 'German sign: blue P with an arrow to the left. Below: werktags 8 to 18h. Below: parking disc, 1 Std.',
-      credit: { author: 'Alexander Rahm', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/wiki/File:Zeichen_314_in_Neuendettelsau_20250126_143043.jpg' },
+      credit: { title: 'Zeichen 314 in Neuendettelsau', author: 'Alexander Rahm', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/wiki/File:Zeichen_314_in_Neuendettelsau_20250126_143043.jpg' },
     },
     {
       id: 'fr',
@@ -55,7 +55,7 @@
       detail: 'Free until 14:00. Then set your disc and move by 15:00.',
       plain: 'With a parking disc you can stay up to 1 hour, from 9:00 to 12:30 and from 14:00 to 19:00. Over lunch there is no limit.',
       alt: 'French sign: blue P with a parking disc symbol. Below: parking disc, 9h00 to 12h30, 14h00 to 19h00, maxi 1h.',
-      credit: { author: 'Sebleouf', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: "https://commons.wikimedia.org/wiki/File:Civrieux-d'Azergues_-_Panneau_C1b_M6c_parking_%C3%A0_disque_(ao%C3%BBt_2018).jpg" },
+      credit: { title: "Civrieux-d'Azergues, Panneau C1b M6c parking à disque", author: 'Sebleouf', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: "https://commons.wikimedia.org/wiki/File:Civrieux-d'Azergues_-_Panneau_C1b_M6c_parking_%C3%A0_disque_(ao%C3%BBt_2018).jpg" },
     },
     {
       id: 'uk',
@@ -66,7 +66,7 @@
       detail: 'Permit holders only until 4:00 pm.',
       plain: 'On Saturdays you can pay at the machine from 9am to 2pm and from 4 to 6.30pm. Between 2 and 4pm, and from 6.30 to 8pm, only zone F permit holders can park here.',
       alt: 'London parking sign. Monday to Friday: 9am to 6.30pm permit holders F or pay at machine, 6.30 to 8pm permit holders only. Saturday: 9am to 2pm and 4 to 6.30pm permit holders F or pay at machine, 2 to 4pm and 6.30 to 8pm permit holders only.',
-      credit: { author: 'DeFacto', license: 'CC BY-SA 2.5', licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.5/', source: 'https://commons.wikimedia.org/wiki/File:Hammersmith_%26_Fulham_roadside_parking_restriction_notice.jpg' },
+      credit: { title: 'Hammersmith & Fulham roadside parking restriction notice', author: 'DeFacto', license: 'CC BY-SA 2.5', licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.5/', source: 'https://commons.wikimedia.org/wiki/File:Hammersmith_%26_Fulham_roadside_parking_restriction_notice.jpg' },
     },
     {
       id: 'se',
@@ -77,7 +77,7 @@
       detail: 'Not allowed until 15:00.',
       plain: 'This is paid parking, up to 2 hours from 08 to 18. But on Wednesdays from 12 to 15, between 1 October and 30 April, parking is not allowed here.',
       alt: 'Swedish sign: blue P. Below: Avgift. Below: 2 tim 08 to 18. Below, yellow: no parking Onsdag 12 to 15, 1 okt to 30 april. Below: 0 to 8 m.',
-      credit: { author: 'Riiga', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/wiki/File:Parkering-Lkpg-Ekkallan-Datum.jpg' },
+      credit: { title: 'Parkering-Lkpg-Ekkallan-Datum', author: 'Riiga', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/wiki/File:Parkering-Lkpg-Ekkallan-Datum.jpg' },
     },
   ];
   let current = countries[0];
@@ -156,7 +156,7 @@
       <figure class="photo">
         <img src="/signs/{current.id}.webp" width="1000" height="1000" alt={current.alt} />
         <figcaption>
-          Photo: <a href={current.credit.source} target="_blank" rel="noopener">{current.credit.author}</a>,
+          <a href={current.credit.source} target="_blank" rel="noopener">{current.credit.title}</a> by {current.credit.author},
           <a href={current.credit.licenseUrl} target="_blank" rel="noopener license">{current.credit.license}</a>, cropped
         </figcaption>
       </figure>
