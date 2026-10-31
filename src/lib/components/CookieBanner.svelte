@@ -26,7 +26,7 @@
 {#if open}
   <div class="banner" role="dialog" aria-label="Cookie consent">
     <p>
-      We'd like to use Google Analytics cookies to see how this site is used. Nothing is loaded unless you accept. <a href="/privacy#p5">Privacy policy</a>
+      We'd like to use Google Analytics cookies to see how this site is used. Analytics only runs if you accept. <a href="/privacy#p5">Privacy policy</a>
     </p>
     <div class="actions">
       <button type="button" class="decline" on:click={() => choose('denied')}>Decline</button>

@@ -14,7 +14,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600;700;800&display=swap"
     />
-    <!-- Google tag (gtag.js), basic consent mode: nothing loads until the visitor accepts the cookie banner. -->
+    <!-- Google tag (gtag.js), basic consent mode: GA doesn't load until the visitor accepts the cookie banner. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -34,11 +34,13 @@
         if (localStorage.getItem('cookie-consent') === 'granted') loadAnalytics();
         else
           // Clears cookies left from an earlier accept, before GA could rewrite them.
+          // GA sets them on the top domain, so www.picpark.app has to clear .picpark.app too.
           document.cookie.split('; ').forEach(function (c) {
             var name = c.split('=')[0];
             if (name.indexOf('_ga') !== 0) return;
             document.cookie = name + '=; max-age=0; path=/';
-            document.cookie = name + '=; max-age=0; path=/; domain=.' + location.hostname;
+            var parts = location.hostname.split('.');
+            for (var i = 0; i < parts.length - 1; i++) document.cookie = name + '=; max-age=0; path=/; domain=.' + parts.slice(i).join('.');
           });
       } catch (e) {}
     </script>
