@@ -76,7 +76,7 @@
         <li>Are processed transiently to generate your result, then discarded (not stored on our servers)</li>
         <li>Are not used to train AI models</li>
         <li>Are not linked to your identity or location</li>
-        <li>Are never sold, shared, or used for advertising</li>
+        <li>Are never sold, or shared or used for advertising</li>
       </ul>
       <p>The resulting analysis is saved only in your device's local history.</p>
       <h3>Location</h3>
@@ -125,9 +125,22 @@
       <div class="notice">
         <div>
           <h3>EU/EEA/UK users</h3>
-          <p>Users in the EU/EEA/UK may be asked for consent before ads are shown.</p>
+          <p>Users in the EU/EEA/UK may be asked for consent to serve personalized or non-personalized ads through our consent management platform.</p>
         </div>
       </div>
+      <h3>Data collected by ad services</h3>
+      <ul>
+        <li>Device identifiers (IDFA/AAID) for ad targeting and measurement</li>
+        <li>Usage data to serve relevant advertisements</li>
+        <li>Ad performance metrics and analytics</li>
+      </ul>
+      <h3>Your ad preferences</h3>
+      <p>You can manage your advertising preferences through the consent form shown when you first use the app, and at any time in the app's settings.</p>
+      <p>
+        For more information about Google's advertising practices, see <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer"
+          >Google's Privacy Policy for Ad Services</a
+        >.
+      </p>
       <p>Purchases are tied to a random device identifier rather than your name or email, so they are not linked to your real-world identity.</p>
     </section>
 

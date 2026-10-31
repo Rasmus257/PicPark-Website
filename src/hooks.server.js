@@ -1,5 +1,5 @@
-// Security headers on every SSR response. GA is bootstrapped inline in app.html and fonts
-// come from Google Fonts, hence 'unsafe-inline' and the Google origins.
+// Security headers on every SSR response. 'unsafe-inline' covers SvelteKit's hydration script,
+// the inline GA bootstrap in app.html and inline style attributes; GA and Google Fonts need their origins.
 const csp = [
   "default-src 'self'",
   "img-src 'self' data: https:",

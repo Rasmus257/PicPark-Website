@@ -40,7 +40,7 @@ PicPark is free to download and use, with no account required. An optional in-ap
 ## 6. Privacy and data handling
 
 - Always collected: basic error reports (via Sentry) and device information (model, OS version).
-- Photos and AI analysis: when you scan a sign, the photo is sent securely to PicPark's server and on to the AI provider (OpenAI) only to produce your result. Photos are processed transiently, not stored on the servers, not used to train AI models, and not linked to your identity or location. They are never sold or shared.
+- Photos and AI analysis: when you scan a sign, the photo is sent securely to PicPark's server and on to the AI provider (OpenAI) only to produce your result. Photos are processed transiently, not stored on the servers, not used to train AI models, and not linked to your identity or location. They are never sold or shared for advertising.
 - Location: with permission, used on the device to label a scan with the nearby city and street. Location is never sent to PicPark's servers, and the app works without it.
 - On-device data: parking history, kept photos, and analytics statistics are stored and computed only on your device. Deleting an item or uninstalling the app removes them.
 - Optional data (when enabled in Settings): detailed usage statistics, feature-interaction data, detailed crash reports, and anonymized AI-analysis results used only to improve accuracy.
